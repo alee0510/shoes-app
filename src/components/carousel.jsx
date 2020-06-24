@@ -2,6 +2,7 @@ import React from 'react'
 import Axios from 'axios'
 import Slider from 'react-slick'
 import { IconButton, Button } from '@material-ui/core'
+import { Link } from "react-scroll"
 
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
@@ -27,7 +28,9 @@ class Carousel extends React.Component {
             <div key={index}>
                 <div style={{ backgroundImage : `url(${item.image})`, ...styles.content}}>
                     <h1 style={styles.titile}>{item.title}</h1>
-                    <Button variant="outlined" style={styles.button}>Shop Now</Button>
+                    <Link to="products" smooth={true} duration={500} spy={true} offset={-50}>
+                        <Button variant="outlined" style={styles.button}>Shop Now</Button>
+                    </Link>
                 </div>
             </div>
         ))
@@ -43,7 +46,7 @@ class Carousel extends React.Component {
             slidesToScroll: 1,
             autoplay: true,
             speed: 3000,
-            autoplaySpeed: 5000,
+            autoplaySpeed: 4000,
             cssEase: "ease",
             appendDots : dots => (
                 <div style={{

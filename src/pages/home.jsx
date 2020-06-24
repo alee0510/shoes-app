@@ -1,9 +1,10 @@
 import React from 'react'
+import { Card } from '@material-ui/core'
 
 // import component
 import Carousel from '../components/carousel'
 import Cards from '../components/card'
-import { Card } from '@material-ui/core'
+import FloatingButton from '../components/floatingButton'
 
 class Home extends React.Component {
     render () {
@@ -11,6 +12,7 @@ class Home extends React.Component {
             <div style={styles.root}>
                 <Carousel/>
                 <Cards/>
+                <FloatingButton/>
             </div>
         )
     }

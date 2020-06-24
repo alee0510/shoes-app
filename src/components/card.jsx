@@ -68,7 +68,7 @@ class Cards extends React.Component {
     render () {
         console.log(this.state.products)
         return (
-            <div style={styles.root}>
+            <div style={styles.root} id="products">
                 <h1 style={styles.title}>Products</h1>
                 <div style={styles.cardContainer}>
                     {this.renderCards()}
