@@ -483,7 +483,7 @@
     ],
     "slider" : [
         {
-            "images" : "https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+            "image" : "https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
             "title" : "Fit your style"
         },
         {
@@ -495,15 +495,15 @@
             "title" : "Fall in love at first glance"
         },
         {
-            "images" : "https://images.unsplash.com/photo-1543322748-33df6d3db806?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
+            "image" : "https://images.unsplash.com/photo-1543322748-33df6d3db806?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
             "title" : "Express your style with us"
         },
         {
-            "images" : "https://images.unsplash.com/photo-1575891942688-395c4fd38fb8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1367&q=80",
+            "image" : "https://images.unsplash.com/photo-1575891942688-395c4fd38fb8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1367&q=80",
             "title" : "Made your day with smile"
         },
         {
-            "images" : "https://images.unsplash.com/photo-1579199265916-436a773ce30b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            "image" : "https://images.unsplash.com/photo-1579199265916-436a773ce30b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
             "title" : "Find what your love"
         }
     ],

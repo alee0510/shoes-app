@@ -1,10 +1,15 @@
 import React from 'react'
 
+// import components
+import Navbar from './components/navbar'
+import Carousel from './components/carousel'
+
 class Main extends React.Component {
     render () {
         return (
             <div>
-                <h1>Hello React</h1>
+                <Navbar/>
+                <Carousel/>
             </div>
         )
     }
