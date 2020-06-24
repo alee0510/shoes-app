@@ -49,12 +49,7 @@ class Cards extends React.Component {
                         variant="contained"
                         disableElevation
                         startIcon={<AddShoppingCartIcon/>}
-                        style={{
-                            marginLeft : '2%',
-                            backgroundColor : '#130f40',
-                            borderRadius : 0,
-                            padding : '3% 7%'
-                        }}
+                        style={styles.buttonBuy}
                     >
                         Buy Now
                     </Button>
@@ -102,7 +97,8 @@ const styles = {
         justifyContent : 'flex-start',
     },
     card : {
-        width : '19%',
+        flexBasis : '19%',
+        minWidth : '300px',
         marginBottom : '1%',
         marginRight : '1%',
         borderRadius : 0
@@ -119,6 +115,12 @@ const styles = {
         fontWeight : 500, 
         fontSize : 20
     },
+    buttonBuy : {
+        marginLeft : '2%',
+        backgroundColor : '#130f40',
+        borderRadius : 0,
+        padding : '3% 7%'
+    }
 }
 
 export default Cards

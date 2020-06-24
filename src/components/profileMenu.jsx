@@ -4,7 +4,9 @@ import {
     Menu,
     MenuItem,
     ListItemIcon,
-    ListItemText 
+    ListItemText,
+    Popover,
+    Typography 
 } from '@material-ui/core'
 
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
@@ -22,7 +24,7 @@ class Profile extends React.Component {
         return (
             <div style={styles.root}>
                 <Avatar style={styles.avatar} onClick={() => this.setState({open : !this.state.open})}>U</Avatar>
-                <Menu
+                <Popover
                     open={this.state.open}
                     onClose={() => this.setState({open : false})}
                     anchorOrigin={{
@@ -30,9 +32,9 @@ class Profile extends React.Component {
                         horizontal : 'right'
                     }}
                     style={styles.menu}
-                    elevation={0}
+                    elevation = {0}
                 >
-                    <MenuItem style={styles.menuItem}>
+                    <MenuItem >
                         <ListItemIcon>
                             <MeetingRoomIcon/>
                         </ListItemIcon>
@@ -44,7 +46,7 @@ class Profile extends React.Component {
                         </ListItemIcon>
                         <ListItemText>Register</ListItemText>
                     </MenuItem>
-                </Menu>
+                </Popover>
             </div>
         )
     }
@@ -56,14 +58,11 @@ const styles = {
         width : '50px',
         display : 'flex',
         justifyContent : 'center',
-        alignItems : 'center',
-        cursor : 'pointer',
-        position : 'relative'
+        alignItems : 'center'
     },
     menu : {
-        top : '-38%',
-        left : '-7%',
-        borderRadius : 0
+        top : '7%',
+        left : '-7%'
     },
     menuItem : {
         width : 200,

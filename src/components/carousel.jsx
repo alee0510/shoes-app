@@ -25,33 +25,9 @@ class Carousel extends React.Component {
     carouselItems = () => {
         return this.state.data.map((item, index) => (
             <div key={index}>
-                <div style={{
-                    backgroundImage : `url(${item.image})`,
-                    backgroundColor : 'green',
-                    backgroundRepeat : 'no-repeat',
-                    backgroundSize : 'cover',
-                    width : '100%',
-                    height : '100vh',
-                    display : 'flex',
-                    flexDirection : 'column',
-                    alignItems : 'center',
-                    justifyContent : 'flex-end',
-                    padding : '5% 0px'
-                }}>
-                    <h1 style={{
-                        color : 'white',
-                        fontSize : 64,
-                        marginBottom : 20,
-                        textTransform : 'capitalize'
-                    }}>{item.title}</h1>
-                    <Button variant="outlined" style={{
-                        width : 200,
-                        height : 50,
-                        borderRadius : 0,
-                        fontSize : 20,
-                        border : '4px solid white',
-                        color : 'white'
-                    }}>Shop Now</Button>
+                <div style={{ backgroundImage : `url(${item.image})`, ...styles.content}}>
+                    <h1 style={styles.titile}>{item.title}</h1>
+                    <Button variant="outlined" style={styles.button}>Shop Now</Button>
                 </div>
             </div>
         ))
@@ -122,6 +98,32 @@ const styles = {
         left : '7%',
         zIndex : 5,
         backgroundColor : 'rgba(255, 255, 255, 0.3)'
+    },
+    content : {
+        backgroundColor : 'green',
+        backgroundRepeat : 'no-repeat',
+        backgroundSize : 'cover',
+        width : '100%',
+        height : '100vh',
+        display : 'flex',
+        flexDirection : 'column',
+        alignItems : 'center',
+        justifyContent : 'flex-end',
+        padding : '5% 0px'
+    },
+    titile : {
+        color : 'white',
+        fontSize : 64,
+        marginBottom : 20,
+        textTransform : 'capitalize'
+    },
+    button : {
+        width : 200,
+        height : 50,
+        borderRadius : 0,
+        fontSize : 20,
+        border : '4px solid white',
+        color : 'white'
     }
 }
 
