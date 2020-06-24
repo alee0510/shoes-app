@@ -29,7 +29,8 @@ class Profile extends React.Component {
                         vertical : 'top',
                         horizontal : 'right'
                     }}
-                    style={styles.popUp}
+                    style={styles.menu}
+                    elevation={0}
                 >
                     <MenuItem style={styles.menuItem}>
                         <ListItemIcon>
@@ -59,9 +60,10 @@ const styles = {
         cursor : 'pointer',
         position : 'relative'
     },
-    popUp : {
+    menu : {
         top : '-38%',
         left : '-7%',
+        borderRadius : 0
     },
     menuItem : {
         width : 200,

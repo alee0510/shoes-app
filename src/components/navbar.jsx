@@ -6,16 +6,16 @@ import {
 } from '@material-ui/core'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
-import { logo } from '../assets'
+import { shopLogo2 } from '../assets'
 import Profile from './profileMenu'
 
 class Navbar extends React.Component {
     render () {
         return (
-            <AppBar position="fixed" style={styles.root}>
+            <AppBar position="fixed" style={styles.root} elevation={0}>
                 <Toolbar style={styles.toolbar}>
                     <div style={styles.logo}>
-                        <img src={logo} alt='logo' height='100%'/>
+                        <img src={shopLogo2} alt='logo' height='100%'/>
                         <ul style={styles.ul}>
                             <li style={styles.list}>Home</li>
                             <li style={styles.list}>Category</li>
@@ -36,7 +36,7 @@ class Navbar extends React.Component {
 
 const styles = {
     root : {
-        backgroundColor : 'rgba(0, 0, 0, 0.3)',
+        backgroundColor : 'rgba(30, 39, 46, 0.3)',
         backdropFilter : 'blur(20px)',
         height : '100px',
         width : '100%',

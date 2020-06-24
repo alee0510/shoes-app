@@ -24,7 +24,7 @@ class Carousel extends React.Component {
 
     carouselItems = () => {
         return this.state.data.map((item, index) => (
-            <div>
+            <div key={index}>
                 <div style={{
                     backgroundImage : `url(${item.image})`,
                     backgroundColor : 'green',
