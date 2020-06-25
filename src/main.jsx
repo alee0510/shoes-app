@@ -8,6 +8,8 @@ import Footer from './components/footer'
 // import pages
 import Home from './pages/home'
 import LogIn from './pages/login'
+import SignUp from './pages/register'
+import ProductDetails from './pages/productDeatils'
 
 class Main extends React.Component {
     render () {
@@ -16,6 +18,8 @@ class Main extends React.Component {
                 <Navbar/>
                 <Route path="/" component={Home} exact/>
                 <Route path="/login" component={LogIn}/>
+                <Route path="/register" component={SignUp}/>
+                <Route path="/details" component={ProductDetails}/>
                 <Footer/>
             </div>
         )

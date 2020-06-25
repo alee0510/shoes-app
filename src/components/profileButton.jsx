@@ -64,12 +64,14 @@ class ProfileButton extends React.Component {
                             <ListItemText style={styles.text}>Login</ListItemText>
                         </MenuItem>
                     </Link>
-                    <MenuItem style={styles.menuItem}>
-                        <ListItemIcon>
-                            <PersonAddIcon/>
-                        </ListItemIcon>
-                        <ListItemText>Register</ListItemText>
-                    </MenuItem>
+                    <Link to='/register' style={styles.link}>
+                        <MenuItem style={styles.menuItem}>
+                            <ListItemIcon>
+                                <PersonAddIcon/>
+                            </ListItemIcon>
+                            <ListItemText style={styles.text}>Register</ListItemText>
+                        </MenuItem>
+                    </Link>
                 </Menu>
             </div>
         )

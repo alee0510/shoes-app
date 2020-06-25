@@ -31,7 +31,7 @@ class Carousel extends React.Component {
                 <div style={{ backgroundImage : `url(${item.image})`, ...styles.content}}>
                     <div style={styles.overlay}></div>
                     <h1 style={styles.titile}>{item.title}</h1>
-                    <Link to="products" smooth={true} duration={500} spy={true} offset={-50}>
+                    <Link to="products" smooth={true} duration={1000} spy={true} offset={-50}>
                         <Button variant="outlined" style={styles.button}>Shop Now</Button>
                     </Link>
                 </div>
@@ -93,14 +93,16 @@ const styles = {
         top : '45%',
         right : '7%',
         zIndex : 5,
-        backgroundColor : 'rgba(255, 255, 255, 0.3)'
+        backgroundColor : 'rgba(255, 255, 255, 0.3)',
+        color : 'white'
     },
     prev : {
         position : 'absolute',
         top : '45%',
         left : '7%',
         zIndex : 5,
-        backgroundColor : 'rgba(255, 255, 255, 0.3)'
+        backgroundColor : 'rgba(255, 255, 255, 0.3)',
+        color : 'white'
     },
     content : {
         backgroundRepeat : 'no-repeat',

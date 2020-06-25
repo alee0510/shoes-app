@@ -29,7 +29,7 @@ const styles = {
         alignItems : 'center'
     },
     copyright : {
-        fontSize : 16,
+        fontSize : 14,
         color : 'white',
         fontWeight : 400
     },

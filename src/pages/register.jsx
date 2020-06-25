@@ -1,19 +1,18 @@
 import React from 'react'
-import Axios from 'axios'
 import { Paper, InputBase, Button } from '@material-ui/core'
-import { Redirect, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import PersonIcon from '@material-ui/icons/Person'
+import EmailIcon from '@material-ui/icons/Email'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 
-class LogIn extends React.Component {
+class SignUp extends React.Component {
     constructor(props) {
-        super(props) 
+        super(props)
         this.state = {
             visible : false,
-            error : false,
-            user : []
+            error : false
         }
     }
 
@@ -22,29 +21,22 @@ class LogIn extends React.Component {
         this.setState({visible : !visible})
     }
 
-    handleLogin = () => {
+    handleSignUp = () => {
         let username = this.username.value
-        let password = this.password.value
+        let email = this.email.value
+        let password = this.email.value
+        let confPassword = this.confPassword.value
 
-        Axios.get(`http://localhost:2000/users?username=${username}&password=${password}`)
-        .then(res => {
-            if(res.data.length === 0) return this.setState({error : true})
-            // console.log(res.data[0])
-            this.setState({error : false, user : res.data[0]})
-        })
-        .catch(err => console.log(err))
+        // check password
+        if (password !== confPassword) return this.setState({error : true})
     }
 
     render () {
-        const { visible, error, user } = this.state
-        if (user.length !== 0) {
-            return <Redirect to='/'/>
-        }
-
+        const { visible, error } = this.state
         return (
             <div style={styles.root}>
-                <Paper style={styles.container} square elevation={1}>
-                    <h1 style={styles.title}>Login</h1>
+                <Paper style={styles.container}>
+                    <h1 style={styles.title}>Register</h1>
                     <div style={styles.inputContainer}>
                         <div style={styles.icon}>
                             <PersonIcon/>
@@ -57,21 +49,43 @@ class LogIn extends React.Component {
                         />
                     </div>
                     <div style={styles.inputContainer}>
+                        <div style={styles.icon}>
+                            <EmailIcon/>
+                        </div>
+                        <InputBase 
+                            type="email" 
+                            placeholder="email" 
+                            style={styles.input} 
+                            inputRef={(email) => this.email = email}
+                        />
+                    </div>
+                    <div style={styles.inputContainer}>
                         <div style={styles.icon} onClick={this.handleClick}>
                             {visible ? <VisibilityIcon/> : <VisibilityOffIcon/>}
                         </div>
                         <InputBase 
                             type={visible ? 'text' : 'password'} 
                             placeholder="password" 
-                            style={styles.input}
+                            style={styles.input} 
                             inputRef={(password) => this.password = password}
+                        />
+                    </div>
+                    <div style={styles.inputContainer}>
+                        <div style={styles.icon} onClick={this.handleClick}>
+                            {visible ? <VisibilityIcon/> : <VisibilityOffIcon/>}
+                        </div>
+                        <InputBase 
+                            type={visible ? 'text' : 'password'} 
+                            placeholder="confirm password" 
+                            style={styles.input} 
+                            inputRef={(confPassword) => this.confPassword = confPassword}
                         />
                     </div>
                     <h5 style={styles.helper}>{error ? '* username or email is invalid.' : ''}</h5>
                     <div style={styles.info}>
-                        <h5 style={{marginRight : 5}}>Forgot password? or</h5>
-                        <Link to='/register'>
-                            <h5>SignUp</h5>
+                        <h5 style={{marginRight : 5}}>Already has an account ?</h5>
+                        <Link to='/login'>
+                            <h5>Sign In</h5>
                         </Link>
                     </div>
                     <Button 
@@ -79,7 +93,7 @@ class LogIn extends React.Component {
                         style={styles.button}
                         onClick={this.handleLogin}
                     >
-                        Login
+                        Sign Up
                     </Button>
                 </Paper>
             </div>
@@ -153,4 +167,4 @@ const styles = {
     }
 }
 
-export default LogIn
+export default SignUp

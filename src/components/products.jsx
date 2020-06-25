@@ -87,7 +87,7 @@ const styles = {
     },
     title : {
         fontSize : 50,
-        fontWeight : 600,
+        fontWeight : 'bold',
         margin : '2% 0px'
     },
     cardContainer : {
