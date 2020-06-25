@@ -98,9 +98,9 @@ const styles = {
     },
     card : {
         flexBasis : '19%',
-        minWidth : '300px',
+        minWidth : '20vw',
         marginBottom : '1%',
-        marginRight : '1%',
+        marginRight : '1vw',
         borderRadius : 0
     },
     contentArea : {

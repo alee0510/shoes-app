@@ -7,6 +7,8 @@ import { Link } from "react-scroll"
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 
+import '../styles/carousel.css'
+
 class Carousel extends React.Component {
     constructor(props) {
         super(props)
@@ -27,6 +29,7 @@ class Carousel extends React.Component {
         return this.state.data.map((item, index) => (
             <div key={index}>
                 <div style={{ backgroundImage : `url(${item.image})`, ...styles.content}}>
+                    <div style={styles.overlay}></div>
                     <h1 style={styles.titile}>{item.title}</h1>
                     <Link to="products" smooth={true} duration={500} spy={true} offset={-50}>
                         <Button variant="outlined" style={styles.button}>Shop Now</Button>
@@ -37,25 +40,6 @@ class Carousel extends React.Component {
     }
 
     render () {
-        console.log(this.state.data)
-        const settings = {
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            speed: 3000,
-            autoplaySpeed: 4000,
-            cssEase: "ease",
-            appendDots : dots => (
-                <div style={styles.dots}>
-                    <ul>{dots}</ul>
-                </div>
-            ),
-            nextArrow : <NextArrow/>,
-            prevArrow : <PrevArrow/>
-        }
         return (
             <div style={styles.root}>
                 <Slider {...settings} style={styles.slider}>
@@ -64,6 +48,26 @@ class Carousel extends React.Component {
             </div>
         )
     }
+}
+
+const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 4000,
+    cssEase: "ease",
+    appendDots : dots => (
+        <div style={styles.dots}>
+            <ul>{dots}</ul>
+        </div>
+    ),
+    nextArrow : <NextArrow/>,
+    prevArrow : <PrevArrow/>,
+    dotsClass : "custom_dot"
 }
 
 const styles = {
@@ -81,7 +85,7 @@ const styles = {
     },
     dots : {
         position : 'absolute',
-        height : 30,
+        height : 40,
         bottom : 0,
         zIndex : 2
     },
@@ -108,13 +112,15 @@ const styles = {
         flexDirection : 'column',
         alignItems : 'center',
         justifyContent : 'flex-end',
-        padding : '5% 0px'
+        padding : '5% 0px',
+        position : 'relative'
     },
     titile : {
         color : 'white',
         fontSize : 64,
-        marginBottom : 20,
-        textTransform : 'capitalize'
+        marginBottom : 30,
+        textTransform : 'capitalize',
+        zIndex : 2
     },
     button : {
         width : 200,
@@ -122,7 +128,19 @@ const styles = {
         borderRadius : 0,
         fontSize : 20,
         border : '4px solid white',
-        color : 'white'
+        color : 'white',
+        zIndex : 2
+    },
+    overlay : {
+        height : '100%',
+        width : '100%',
+        backgroundColor : 'pink',
+        position : 'absolute',
+        top : 0,
+        left : 0,
+        zIndex : 1,
+        background: 'rgb(30,39,46)',
+        background: 'linear-gradient(0deg, rgba(30,39,46,0.8) 7%, rgba(255,255,255,0) 100%)'
     }
 }
 

@@ -1,0 +1,38 @@
+.custom_dot {
+    display: inline-block;
+    vertical-align: middle;
+    margin: auto;
+    padding: 0;
+    border-radius: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.custom_dot li {
+    list-style: none;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 7px;
+    padding: 0;
+}
+.custom_dot li button {
+    border: none;
+    background: white;
+    opacity: 0.3;
+    color: transparent;
+    cursor: pointer;
+    display: block;
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+}
+
+.custom_dot li.slick-active button {
+    opacity: 0.9;
+}
+
+.custom_dot li button:hover,
+.custom_dot li button:focus {
+    outline: 0;
+    opacity: 0.9;
+}

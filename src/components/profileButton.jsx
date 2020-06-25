@@ -3,10 +3,16 @@ import {
     IconButton, 
     Avatar,
     Menu,
-    MenuItem
+    MenuItem,
+    ListItemIcon,
+    ListItemText
 } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
-class Profile extends React.Component {
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
+
+class ProfileButton extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
@@ -46,13 +52,42 @@ class Profile extends React.Component {
                         vertical: 'top',
                         horizontal: 'right',
                     }}
+                    style={styles.menu}
                 >
-                    <MenuItem >Login</MenuItem>
-                    <MenuItem >Register</MenuItem>
+                    <Link to='/login' style={styles.link}>
+                        <MenuItem style={styles.menuItem}>
+                            <ListItemIcon>
+                                <MeetingRoomIcon/>
+                            </ListItemIcon>
+                            <ListItemText style={styles.text}>Login</ListItemText>
+                        </MenuItem>
+                    </Link>
+                    <MenuItem style={styles.menuItem}>
+                        <ListItemIcon>
+                            <PersonAddIcon/>
+                        </ListItemIcon>
+                        <ListItemText>Register</ListItemText>
+                    </MenuItem>
                 </Menu>
             </div>
         )
     }
 }
 
-export default Profile
+const styles = {
+    menu : {
+        top : '7%',
+        left : '3%'
+    },
+    menuItem : {
+        width : 200
+    },
+    link : {
+        textDecoration : 'none',
+    },
+    text : {
+        color : 'black'
+    }
+}
+
+export default ProfileButton

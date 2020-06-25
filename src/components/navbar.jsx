@@ -4,11 +4,12 @@ import {
     Toolbar,
     Avatar
 } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 import { LOGO } from '../assets'
-import Profile from '../components/profile'
+import ProfileButton from '../components/profileButton'
 
 class Navbar extends React.Component {
     render () {
@@ -17,14 +18,16 @@ class Navbar extends React.Component {
                 <Toolbar style={styles.toolbar}>
                     <div style={styles.leftContent}>
                         <img src={LOGO} alt='logo' height='100%'/>
-                        <h1 style={styles.home}>Home</h1>
+                        <Link to='/' style={styles.link}>
+                            <h1 style={styles.home}>Home</h1>
+                        </Link>
                     </div>
                     <div style={styles.rightContent}>
                         <div style={styles.cart}>
                             <ShoppingCartIcon/>
                             <h6 style={styles.cartTotal}>Rp. 0</h6>
                         </div>
-                        <Profile/>
+                        <ProfileButton/>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -56,9 +59,9 @@ const styles = {
         alignItems : 'center'
     },
     home : {
-        paddingLeft : '3%',
         fontSize : 20,
-        cursor : 'pointer'
+        cursor : 'pointer',
+        color : 'white'
     },
     rightContent : {
         height : '100%',
@@ -76,6 +79,10 @@ const styles = {
     cartTotal : {
         fontSize : 16,
         marginLeft : 15
+    },
+    link : {
+        textDecoration : 'none',
+        paddingLeft : '3%',
     }
 }
 

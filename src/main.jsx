@@ -7,6 +7,7 @@ import Footer from './components/footer'
 
 // import pages
 import Home from './pages/home'
+import LogIn from './pages/login'
 
 class Main extends React.Component {
     render () {
@@ -14,6 +15,7 @@ class Main extends React.Component {
             <div>
                 <Navbar/>
                 <Route path="/" component={Home} exact/>
+                <Route path="/login" component={LogIn}/>
                 <Footer/>
             </div>
         )
