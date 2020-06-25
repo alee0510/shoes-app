@@ -49,14 +49,7 @@ class Carousel extends React.Component {
             autoplaySpeed: 4000,
             cssEase: "ease",
             appendDots : dots => (
-                <div style={{
-                    // backgroundColor : 'green',
-                    position : 'absolute',
-                    height : 30,
-                    bottom : 0,
-                    zIndex : 2
-                }}
-                >
+                <div style={styles.dots}>
                     <ul>{dots}</ul>
                 </div>
             ),
@@ -87,6 +80,12 @@ const styles = {
         width : '100%',
         backgroundColor : 'white',
         posistion : 'relative',
+    },
+    dots : {
+        position : 'absolute',
+        height : 30,
+        bottom : 0,
+        zIndex : 2
     },
     next : {
         position : 'absolute',

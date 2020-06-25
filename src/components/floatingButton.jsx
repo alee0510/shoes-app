@@ -1,7 +1,8 @@
 import React from 'react'
 import { IconButton } from '@material-ui/core'
+import { animateScroll as scroll } from "react-scroll"
+
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
-import { animateScroll as scroll } from "react-scroll";
 
 export default function FloatingButton () {
     return (

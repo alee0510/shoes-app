@@ -2,31 +2,28 @@ import React from 'react'
 import {
     AppBar,
     Toolbar,
-    Typography,
+    Avatar
 } from '@material-ui/core'
+
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
-import { shopLogo2 } from '../assets'
-import Profile from './profileMenu'
+import { LOGO } from '../assets'
 
 class Navbar extends React.Component {
     render () {
         return (
             <AppBar position="fixed" style={styles.root} elevation={0}>
                 <Toolbar style={styles.toolbar}>
-                    <div style={styles.logo}>
-                        <img src={shopLogo2} alt='logo' height='100%'/>
-                        <ul style={styles.ul}>
-                            <li style={styles.list}>Home</li>
-                            <li style={styles.list}>Category</li>
-                        </ul>
+                    <div style={styles.leftContent}>
+                        <img src={LOGO} alt='logo' height='100%'/>
+                        <h1 style={styles.home}>Home</h1>
                     </div>
-                    <div style={styles.rightMenu}>
-                        <div style={styles.cartIcon}>
+                    <div style={styles.rightContent}>
+                        <div style={styles.cart}>
                             <ShoppingCartIcon/>
-                            <Typography variant="h6" style ={{marginLeft : 15}}>Rp. 0</Typography>
+                            <h6 style={styles.cartTotal}>Rp. 0</h6>
                         </div>
-                        <Profile/>
+                        <Avatar>U</Avatar>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -38,55 +35,46 @@ const styles = {
     root : {
         backgroundColor : 'rgba(30, 39, 46, 0.3)',
         backdropFilter : 'blur(20px)',
-        height : '100px',
+        height : 90,
         width : '100%',
+        padding : '2% 7%',
         display : 'flex',
-        justifyContent : 'center',
-        padding : '2% 7%'
+        justifyContent : 'center'
     },
     toolbar : {
-        // backgroundColor : 'white',
         display : 'flex',
         justifyContent : 'space-between',
         padding : 0
     },
-    logo : {
+    leftContent : {
         height : '100%',
         flexBasis : '50%',
         maxWidth : '50%',
-        // backgroundColor : 'yellow',
         display : 'flex',
-        justifyContent : 'flex-start'
+        justifyContent : 'flex-start',
+        alignItems : 'center'
     },
-    ul : {
-        textDecoration : 'none',
-        height : '100%',
-        width : '100%',
-        // backgroundColor : 'red',
-        display : 'flex',
-        alignItems : 'center',
-        paddingLeft : '5%'
-    },
-    list : {
-        display : 'inline-block',
+    home : {
+        paddingLeft : '3%',
         fontSize : 20,
-        marginRight : '3%',
-        cursor : 'pointer',
-        fontWeight : 600
+        cursor : 'pointer'
     },
-    rightMenu : {
-        height : '100%', 
+    rightContent : {
+        height : '100%',
         flexBasis : '50%',
-        // backgroundColor : 'aqua',
         display : 'flex',
         justifyContent : 'flex-end',
         alignItems : 'center'
     },
-    cartIcon : {
+    cart : {
+        height : '100%',
         display : 'flex',
         alignItems : 'center',
-        marginRight : 15,
-        cursor : 'pointer'
+        marginRight : 15
+    },
+    cartTotal : {
+        fontSize : 16,
+        marginLeft : 15
     }
 }
 

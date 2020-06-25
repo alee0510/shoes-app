@@ -4,20 +4,18 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
 
-class Footer extends React.Component {
-    render () {
-        return (
-            <div style={styles.root}>
-                <h1 style={styles.copyright}>Copyright 2020 © alee0510</h1>
-                <ul style={styles.ul}>
-                    <li style={styles.li}><InstagramIcon fontSize="small"/></li>
-                    <li style={styles.li}><FacebookIcon fontSize="small"/></li>
-                    <li style={styles.li}><TwitterIcon fontSize="small"/></li>
-                    <li style={styles.li}><GitHubIcon fontSize="small"/></li>
-                </ul>
-            </div>
-        )
-    }
+function Footer () {
+    return (
+        <div style={styles.root}>
+            <h1 style={styles.copyright}>Copyright 2020 © alee0510</h1>
+            <ul style={styles.ul}>
+                <li style={styles.li}><InstagramIcon fontSize="small"/></li>
+                <li style={styles.li}><FacebookIcon fontSize="small"/></li>
+                <li style={styles.li}><TwitterIcon fontSize="small"/></li>
+                <li style={styles.li}><GitHubIcon fontSize="small"/></li>
+            </ul>
+        </div>
+    )
 }
 
 const styles = {

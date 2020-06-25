@@ -13,7 +13,7 @@ import {
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 
-class Cards extends React.Component {
+class Products extends React.Component {
     constructor (props) {
         super (props) 
         this.state = {
@@ -66,7 +66,7 @@ class Cards extends React.Component {
     }
 
     render () {
-        console.log(this.state.products)
+        // console.log(this.state.products)
         return (
             <div style={styles.root} id="products">
                 <h1 style={styles.title}>Products</h1>
@@ -123,4 +123,4 @@ const styles = {
     }
 }
 
-export default Cards
+export default Products
