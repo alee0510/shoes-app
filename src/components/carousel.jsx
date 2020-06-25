@@ -53,7 +53,6 @@ class Carousel extends React.Component {
 const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -139,7 +138,6 @@ const styles = {
         top : 0,
         left : 0,
         zIndex : 1,
-        background: 'rgb(30,39,46)',
         background: 'linear-gradient(0deg, rgba(30,39,46,0.8) 7%, rgba(255,255,255,0) 100%)'
     }
 }

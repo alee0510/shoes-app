@@ -1,5 +1,7 @@
 import React from 'react'
+import Axios from 'axios'
 import { Paper, InputBase, Button } from '@material-ui/core'
+import { Redirect } from 'react-router-dom'
 
 import PersonIcon from '@material-ui/icons/Person'
 import VisibilityIcon from '@material-ui/icons/Visibility'
@@ -9,7 +11,9 @@ class LogIn extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
-            visible : false
+            visible : false,
+            error : false,
+            user : []
         }
     }
 
@@ -18,8 +22,25 @@ class LogIn extends React.Component {
         this.setState({visible : !visible})
     }
 
+    handleLogin = () => {
+        let username = this.username.value
+        let password = this.password.value
+
+        Axios.get(`http://localhost:2000/users?username=${username}&password=${password}`)
+        .then(res => {
+            if(res.data.length === 0) return this.setState({error : true})
+            // console.log(res.data[0])
+            this.setState({error : false, user : res.data[0]})
+        })
+        .catch(err => console.log(err))
+    }
+
     render () {
-        const { visible } = this.state
+        const { visible, error, user } = this.state
+        if (user.length !== 0) {
+            return <Redirect to='/'/>
+        }
+
         return (
             <div style={styles.root}>
                 <Paper style={styles.container} square elevation={1}>
@@ -28,23 +49,35 @@ class LogIn extends React.Component {
                         <div style={styles.icon}>
                             <PersonIcon/>
                         </div>
-                        <InputBase type="text" placeholder="username" style={styles.input}/>
+                        <InputBase 
+                            type="text" 
+                            placeholder="username" 
+                            style={styles.input} 
+                            inputRef={(username) => this.username = username}
+                        />
                     </div>
                     <div style={styles.inputContainer}>
                         <div style={styles.icon} onClick={this.handleClick}>
                             {visible ? <VisibilityIcon/> : <VisibilityOffIcon/>}
                         </div>
-                        <InputBase type={visible ? 'text' : 'password'} placeholder="password" style={styles.input}/>
+                        <InputBase 
+                            type={visible ? 'text' : 'password'} 
+                            placeholder="password" 
+                            style={styles.input}
+                            inputRef={(password) => this.password = password}
+                        />
                     </div>
+                    <h5 style={styles.helper}>{error ? '* username or email is invalid.' : ''}</h5>
                     <div style={styles.info}>
                         <h5 style={{marginRight : 5}}>Forgot password?</h5>
                         <h5>or SignUp</h5>
                     </div>
                     <Button 
-                        variant="conatined" 
+                        variant="contained" 
                         style={styles.button}
+                        onClick={this.handleLogin}
                     >
-                            Login
+                        Login
                     </Button>
                 </Paper>
             </div>
@@ -104,7 +137,7 @@ const styles = {
     info : {
         display : 'flex',
         alignItems : 'center',
-        margin : '5% 0px'
+        margin : '3% 0px'
     },
     button : {
         backgroundColor : '#130f40',
@@ -113,6 +146,9 @@ const styles = {
         width : '50%',
         alignSelf : 'flex-start',
         marginTop : '10%'
+    },
+    helper : {
+        color : '#EA2027'
     }
 }
 

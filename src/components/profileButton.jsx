@@ -21,6 +21,7 @@ class ProfileButton extends React.Component {
     }
 
     handleClick = (event) => {
+        // console.log(event.currentTarget)
         this.setState({anchorEl : event.currentTarget})
     }
 
@@ -44,6 +45,7 @@ class ProfileButton extends React.Component {
                     keepMounted
                     open={Boolean(this.state.anchorEl)}
                     onClose={this.handleClose}
+                    getContentAnchorEl={null}
                     anchorOrigin={{
                         vertical: 'bottom',
                         horizontal: 'left',
@@ -76,7 +78,7 @@ class ProfileButton extends React.Component {
 
 const styles = {
     menu : {
-        top : '7%',
+        top : '0%',
         left : '3%'
     },
     menuItem : {
