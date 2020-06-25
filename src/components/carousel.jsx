@@ -70,7 +70,6 @@ const styles = {
     root : {
         height : '100vh',
         width : '100%',
-        backgroundColor : 'yellow',
         display : 'flex',
         justifyContent : 'center',
         alignItems : 'center'
@@ -78,7 +77,6 @@ const styles = {
     slider : {
         height : '100%',
         width : '100%',
-        backgroundColor : 'white',
         posistion : 'relative',
     },
     dots : {
@@ -102,7 +100,6 @@ const styles = {
         backgroundColor : 'rgba(255, 255, 255, 0.3)'
     },
     content : {
-        backgroundColor : 'green',
         backgroundRepeat : 'no-repeat',
         backgroundSize : 'cover',
         width : '100%',

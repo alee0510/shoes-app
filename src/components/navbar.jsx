@@ -8,6 +8,7 @@ import {
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 import { LOGO } from '../assets'
+import Profile from '../components/profile'
 
 class Navbar extends React.Component {
     render () {
@@ -23,7 +24,7 @@ class Navbar extends React.Component {
                             <ShoppingCartIcon/>
                             <h6 style={styles.cartTotal}>Rp. 0</h6>
                         </div>
-                        <Avatar>U</Avatar>
+                        <Profile/>
                     </div>
                 </Toolbar>
             </AppBar>
