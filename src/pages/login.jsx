@@ -29,7 +29,7 @@ class LogIn extends React.Component {
         Axios.get(`http://localhost:2000/users?username=${username}&password=${password}`)
         .then(res => {
             if(res.data.length === 0) return this.setState({error : true})
-            // console.log(res.data[0])
+
             this.setState({error : false, user : res.data[0]})
         })
         .catch(err => console.log(err))
@@ -37,8 +37,9 @@ class LogIn extends React.Component {
 
     render () {
         const { visible, error, user } = this.state
+
         if (user.length !== 0) {
-            return <Redirect to='/'/>
+            return <Redirect to="/"/>
         }
 
         return (

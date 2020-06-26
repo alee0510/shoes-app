@@ -12,14 +12,19 @@ import SignUp from './pages/register'
 import ProductDetails from './pages/productDeatils'
 
 class Main extends React.Component {
+    componentDidMount () {
+        console.log(localStorage.getItem('id'))
+    }
+
     render () {
+        console.log('home')
         return (
             <div>
                 <Navbar/>
                 <Route path="/" component={Home} exact/>
-                <Route path="/login" component={LogIn}/>
-                <Route path="/register" component={SignUp}/>
-                <Route path="/details" component={ProductDetails}/>
+                <Route path="/login" component={LogIn} exact/>
+                <Route path="/register" component={SignUp} exact/>
+                <Route path="/details" component={ProductDetails} exact/>
                 <Footer/>
             </div>
         )
