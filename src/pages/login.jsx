@@ -95,14 +95,17 @@ const styles = {
         backgroundColor : '#f2f2f2',
         display : 'flex',
         justifyContent : 'center',
-        alignItems : 'center'
+        alignItems : 'center',
+        backgroundImage : 'url(https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)',
+        backgroundRepeat : 'no-repeat',
+        backgroundSize : 'cover'
     },
     container : {
         height : '70vh',
         width : '40vw',
         display : 'flex',
         flexDirection : 'column',
-        padding : '3% 5%'
+        padding : '3% 5%',
     },
     inputContainer : {
         height : 50,

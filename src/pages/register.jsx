@@ -35,7 +35,7 @@ class SignUp extends React.Component {
         const { visible, error } = this.state
         return (
             <div style={styles.root}>
-                <Paper style={styles.container}>
+                <Paper style={styles.container} square>
                     <h1 style={styles.title}>Register</h1>
                     <div style={styles.inputContainer}>
                         <div style={styles.icon}>
@@ -109,7 +109,10 @@ const styles = {
         backgroundColor : '#f2f2f2',
         display : 'flex',
         justifyContent : 'center',
-        alignItems : 'center'
+        alignItems : 'center',
+        backgroundImage : 'url(https://images.unsplash.com/photo-1552346154-7841f684d259?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)',
+        backgroundRepeat : 'no-repeat',
+        backgroundSize : 'cover'
     },
     container : {
         height : '70vh',
