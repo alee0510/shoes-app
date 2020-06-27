@@ -1,6 +1,7 @@
 import React from 'react'
-import { Paper, InputBase, Button } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import Axios from 'axios'
+import { Paper, InputBase, Button, Checkbox } from '@material-ui/core'
+import { Link, Redirect } from 'react-router-dom'
 
 import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
@@ -12,7 +13,10 @@ class SignUp extends React.Component {
         super(props)
         this.state = {
             visible : false,
-            error : false
+            success : false,
+            agreement : false,
+            error : [false, ''],
+            password : null
         }
     }
 
@@ -24,15 +28,52 @@ class SignUp extends React.Component {
     handleSignUp = () => {
         let username = this.username.value
         let email = this.email.value
-        let password = this.email.value
+        let password = this.state.password
         let confPassword = this.confPassword.value
 
+        // console.log('sign up')
+        // console.log(this.state.agreement)
+
+        // check input
+        if ([username, email, password, confPassword].includes('')) return this.setState({error : [true, '* please fill all form.']})
+        
         // check password
-        if (password !== confPassword) return this.setState({error : true})
+        if (password !== confPassword) return this.setState({error : [true, '* password doesn\'t match.']})
+        
+        // check agreement
+        if (!this.state.agreement) return this.setState({error : [true, '* please check Terms of Service and Privacy Statement.']})
+
+        // post data to database
+        Axios.post('http://localhost:2000/users', { username, password, email, role : 'user'})
+        .then(res => {
+            console.log(res.data)
+            this.setState({ success : true , error : [false, ''], agreement : false})
+        })
+        .catch(err => console.log(err))
+    }
+
+    handleChange = (event) => {
+        let password = event.target.value
+        // console.log(password)
+        
+        let number = /[0-9]/
+        let symbol = /[!@#$%^&*;]/
+
+        // check password
+        if (password.length < 6 || !number.test(password) || !symbol.test(password)) {
+            return this.setState({error : [true, '* password must min 6 characters, include number and symbol']})
+        }
+
+        this.setState({ password : password , error : [false, '']})
     }
 
     render () {
-        const { visible, error } = this.state
+        const { visible, error, success, agreement } = this.state
+
+        if (success) {
+            return <Redirect to='/login'/>
+        }
+
         return (
             <div style={styles.root}>
                 <Paper style={styles.container} square>
@@ -67,7 +108,8 @@ class SignUp extends React.Component {
                             type={visible ? 'text' : 'password'} 
                             placeholder="password" 
                             style={styles.input} 
-                            inputRef={(password) => this.password = password}
+                            // inputRef={(password) => this.password = password}
+                            onChange={(e) => this.handleChange(e)}
                         />
                     </div>
                     <div style={styles.inputContainer}>
@@ -81,20 +123,24 @@ class SignUp extends React.Component {
                             inputRef={(confPassword) => this.confPassword = confPassword}
                         />
                     </div>
-                    <h5 style={styles.helper}>{error ? '* username or email is invalid.' : ''}</h5>
+                    <h5 style={styles.helper}>{error[0] ? error[1] : ''}</h5>
+                    <div style={styles.agreement}>
+                        <Checkbox checked={agreement} style={styles.checkBox} onChange={() => this.setState({agreement : !agreement})}/>
+                        <h5>By clicking “Sign up for Shoes Shop, you agree to our Terms of Service and Privacy Statement. We’ll occasionally send you account related emails.</h5>
+                    </div>
+                    <Button 
+                        variant="contained" 
+                        style={styles.button}
+                        onClick={this.handleSignUp}
+                    >
+                        Sign Up
+                    </Button>
                     <div style={styles.info}>
                         <h5 style={{marginRight : 5}}>Already has an account ?</h5>
                         <Link to='/login'>
                             <h5>Sign In</h5>
                         </Link>
                     </div>
-                    <Button 
-                        variant="contained" 
-                        style={styles.button}
-                        onClick={this.handleLogin}
-                    >
-                        Sign Up
-                    </Button>
                 </Paper>
             </div>
         )
@@ -163,10 +209,23 @@ const styles = {
         fontWeight : 'bold',
         width : '50%',
         alignSelf : 'flex-start',
-        marginTop : '10%'
+        marginTop : '5%'
     },
     helper : {
-        color : '#EA2027'
+        color : '#EA2027',
+        fontSize : 12
+    },
+    agreement : {
+        margin : '2% 0px',
+        fontSize : 14,
+        display : 'flex',
+        alignItems : 'flex-start'
+    },
+    checkBox : {
+        marginRight : 10,
+        color : '#130f40', 
+        height : 15, 
+        width : 15
     }
 }
 

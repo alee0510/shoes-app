@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { 
     IconButton, 
     Avatar,
@@ -11,6 +12,12 @@ import { Link } from 'react-router-dom'
 
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
+import FaceIcon from '@material-ui/icons/Face'
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
+import HistoryIcon from '@material-ui/icons/History'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+
+import { logOut } from '../actions'
 
 class ProfileButton extends React.Component {
     constructor (props) {
@@ -37,7 +44,11 @@ class ProfileButton extends React.Component {
                     aria-haspopup="true" 
                     onClick={(e) => this.handleClick(e)}
                 >
-                    <Avatar>U</Avatar>
+                    {
+                        this.props.username ? 
+                        <Avatar style={{background : '#130f40'}}>{this.props.username.charAt(0).toUpperCase()}</Avatar> : 
+                        <Avatar>U</Avatar>
+                    }
                 </IconButton>
                 <Menu
                     id="simple-menu"
@@ -56,6 +67,8 @@ class ProfileButton extends React.Component {
                     }}
                     style={styles.menu}
                 >
+                {   !this.props.username ?
+                    <>
                     <Link to='/login' style={styles.link}>
                         <MenuItem style={styles.menuItem}>
                             <ListItemIcon>
@@ -72,6 +85,35 @@ class ProfileButton extends React.Component {
                             <ListItemText style={styles.text}>Register</ListItemText>
                         </MenuItem>
                     </Link>
+                    </>
+                    :
+                    <>
+                    <MenuItem style={styles.menuItem}>
+                        <ListItemIcon>
+                                <FaceIcon/>
+                            </ListItemIcon>
+                        <ListItemText style={styles.text}>Profile</ListItemText>
+                    </MenuItem>
+                    <MenuItem style={styles.menuItem}>
+                        <ListItemIcon>
+                                <ShoppingBasketIcon/>
+                            </ListItemIcon>
+                        <ListItemText style={styles.text}>Cart</ListItemText>
+                    </MenuItem>
+                    <MenuItem style={styles.menuItem}>
+                        <ListItemIcon>
+                                <HistoryIcon/>
+                            </ListItemIcon>
+                        <ListItemText style={styles.text}>History</ListItemText>
+                    </MenuItem>
+                    <MenuItem style={styles.menuItem} onClick={() => this.props.logOut()}>
+                        <ListItemIcon>
+                                <ExitToAppIcon/>
+                            </ListItemIcon>
+                        <ListItemText style={styles.text}>Logout</ListItemText>
+                    </MenuItem>
+                    </>
+                }
                 </Menu>
             </div>
         )
@@ -94,4 +136,10 @@ const styles = {
     }
 }
 
-export default ProfileButton
+const mapStore = ({user}) => {
+    return {
+        username : user.username
+    }
+}
+
+export default connect(mapStore, { logOut })(ProfileButton)

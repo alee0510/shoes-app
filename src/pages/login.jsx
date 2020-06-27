@@ -1,5 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
+import { connect } from 'react-redux'
 import { Paper, InputBase, Button } from '@material-ui/core'
 import { Redirect, Link } from 'react-router-dom'
 
@@ -7,13 +8,14 @@ import PersonIcon from '@material-ui/icons/Person'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 
+import { logIn } from '../actions'
+
 class LogIn extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
             visible : false,
-            error : false,
-            user : []
+            error : false
         }
     }
 
@@ -26,20 +28,13 @@ class LogIn extends React.Component {
         let username = this.username.value
         let password = this.password.value
 
-        Axios.get(`http://localhost:2000/users?username=${username}&password=${password}`)
-        .then(res => {
-            if(res.data.length === 0) return this.setState({error : true})
-            
-            localStorage.setItem('id', res.data[0].id)
-            this.setState({error : false, user : res.data[0]})
-        })
-        .catch(err => console.log(err))
+        this.props.logIn(username, password)
     }
 
     render () {
-        const { visible, error, user } = this.state
+        const { visible, error } = this.state
 
-        if (user.length !== 0) {
+        if (this.props.username) {
             return <Redirect to="/"/>
         }
 
@@ -158,4 +153,10 @@ const styles = {
     }
 }
 
-export default LogIn
+const mapStore = ({user}) => {
+    return {
+        username : user.username
+    }
+}
+
+export default connect(mapStore, {logIn})(LogIn)

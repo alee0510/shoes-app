@@ -1,5 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
+import { connect } from 'react-redux'
 import Slider from 'react-slick'
 import { IconButton, Button } from '@material-ui/core'
 import { Link } from "react-scroll"
@@ -9,24 +10,15 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 
 import '../styles/carousel.css'
 
-class Carousel extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            data : []
-        }
-    }
+import { getCarouselData } from '../actions'
 
+class Carousel extends React.Component {
     componentDidMount () {
-        Axios.get('http://localhost:2000/slider')
-        .then(res => {
-            this.setState({data : res.data})
-        })
-        .catch(err => console.log(err))
+        this.props.getCarouselData()
     }
 
     carouselItems = () => {
-        return this.state.data.map((item, index) => (
+        return this.props.data.map((item, index) => (
             <div key={index}>
                 <div style={{ backgroundImage : `url(${item.image})`, ...styles.content}}>
                     <div style={styles.overlay}></div>
@@ -162,4 +154,10 @@ function PrevArrow (props) {
     )
 }
 
-export default Carousel
+const mapStore = ({ carousel }) => {
+    return {
+        data : carousel.data
+    }
+}
+
+export default connect(mapStore, { getCarouselData })(Carousel)
