@@ -1,5 +1,4 @@
 import React from 'react'
-import Axios from 'axios'
 import { connect } from 'react-redux'
 import { Paper, InputBase, Button } from '@material-ui/core'
 import { Redirect, Link } from 'react-router-dom'

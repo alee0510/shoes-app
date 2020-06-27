@@ -1,9 +1,8 @@
 import React from 'react'
-import Axios from 'axios'
 import { connect } from 'react-redux'
-import Slider from 'react-slick'
 import { IconButton, Button } from '@material-ui/core'
 import { Link } from "react-scroll"
+import Slider from 'react-slick'
 
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'

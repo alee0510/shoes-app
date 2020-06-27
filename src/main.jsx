@@ -9,7 +9,7 @@ import Footer from './components/footer'
 import Home from './pages/home'
 import LogIn from './pages/login'
 import SignUp from './pages/register'
-import ProductDetails from './pages/productDeatils'
+import ProductDetails from './pages/productDetails'
 
 class Main extends React.Component {
     componentDidMount () {

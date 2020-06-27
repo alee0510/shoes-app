@@ -1,5 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
+import { Link } from 'react-router-dom'
 import {
     Card,
     CardActionArea,
@@ -44,19 +45,21 @@ class Products extends React.Component {
                     </CardContent>
                 </CardActionArea>
                 <CardActions style={{height : '13%'}}>
-                    <Button 
-                        size="small" color="primary"
-                        variant="contained"
-                        disableElevation
-                        startIcon={<AddShoppingCartIcon/>}
-                        style={styles.buttonBuy}
-                    >
-                        Buy Now
-                    </Button>
+                    <Link to={`/details?id=${item.id}`} style={styles.link}>
+                        <Button 
+                            size="small" color="primary"
+                            variant="contained"
+                            disableElevation
+                            startIcon={<AddShoppingCartIcon/>}
+                            style={styles.buttonBuy}
+                        >
+                            Buy Now
+                        </Button>
+                    </Link>
                     <Button 
                         size="small" color="secondary"
                         startIcon={<FavoriteIcon/>}
-                        style={{padding : '3% 7%', borderRadius : 0}}
+                        style={{height : 40, width : '40%', borderRadius : 0}}
                     >
                         Wishlist
                     </Button>
@@ -116,10 +119,16 @@ const styles = {
         fontSize : 20
     },
     buttonBuy : {
-        marginLeft : '2%',
         backgroundColor : '#130f40',
         borderRadius : 0,
+        width : '100%',
+        height : '100%',
         padding : '3% 7%'
+    },
+    link : {
+        textDecoration : 'none',
+        width : '40%',
+        height : 40
     }
 }
 
