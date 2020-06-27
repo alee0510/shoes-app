@@ -70,7 +70,7 @@ class ProfileButton extends React.Component {
                 {   !this.props.username ?
                     <>
                     <Link to='/login' style={styles.link}>
-                        <MenuItem style={styles.menuItem}>
+                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
                             <ListItemIcon>
                                 <MeetingRoomIcon/>
                             </ListItemIcon>
@@ -78,7 +78,7 @@ class ProfileButton extends React.Component {
                         </MenuItem>
                     </Link>
                     <Link to='/register' style={styles.link}>
-                        <MenuItem style={styles.menuItem}>
+                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
                             <ListItemIcon>
                                 <PersonAddIcon/>
                             </ListItemIcon>
@@ -88,25 +88,25 @@ class ProfileButton extends React.Component {
                     </>
                     :
                     <>
-                    <MenuItem style={styles.menuItem}>
+                    <MenuItem style={styles.menuItem} onClick={this.handleClose}>
                         <ListItemIcon>
                                 <FaceIcon/>
                             </ListItemIcon>
                         <ListItemText style={styles.text}>Profile</ListItemText>
                     </MenuItem>
-                    <MenuItem style={styles.menuItem}>
+                    <MenuItem style={styles.menuItem} onClick={this.handleClose}>
                         <ListItemIcon>
                                 <ShoppingBasketIcon/>
                             </ListItemIcon>
                         <ListItemText style={styles.text}>Cart</ListItemText>
                     </MenuItem>
-                    <MenuItem style={styles.menuItem}>
+                    <MenuItem style={styles.menuItem} onClick={this.handleClose}>
                         <ListItemIcon>
                                 <HistoryIcon/>
                             </ListItemIcon>
                         <ListItemText style={styles.text}>History</ListItemText>
                     </MenuItem>
-                    <MenuItem style={styles.menuItem} onClick={() => this.props.logOut()}>
+                    <MenuItem style={styles.menuItem} onClick={() => {this.props.logOut(); this.handleClose();}}>
                         <ListItemIcon>
                                 <ExitToAppIcon/>
                             </ListItemIcon>
