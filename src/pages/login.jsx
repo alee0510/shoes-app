@@ -29,7 +29,8 @@ class LogIn extends React.Component {
         Axios.get(`http://localhost:2000/users?username=${username}&password=${password}`)
         .then(res => {
             if(res.data.length === 0) return this.setState({error : true})
-
+            
+            localStorage.setItem('id', res.data[0].id)
             this.setState({error : false, user : res.data[0]})
         })
         .catch(err => console.log(err))

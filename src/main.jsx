@@ -13,11 +13,11 @@ import ProductDetails from './pages/productDeatils'
 
 class Main extends React.Component {
     componentDidMount () {
-        console.log(localStorage.getItem('id'))
+        console.log('main run')
+        // console.log(localStorage.getItem('id'))
     }
 
     render () {
-        console.log('home')
         return (
             <div>
                 <Navbar/>
