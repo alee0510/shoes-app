@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 // import components
 import Navbar from './components/navbar'
@@ -10,8 +11,16 @@ import Home from './pages/home'
 import LogIn from './pages/login'
 import SignUp from './pages/register'
 import ProductDetails from './pages/productDetails'
+import UserCart from './pages/userCart'
+
+// import actions
+import { keepLogin } from './actions'
 
 class Main extends React.Component {
+    componentDidMount () {
+        this.props.keepLogin()
+    }
+
     render () {
         return (
             <div>
@@ -20,10 +29,11 @@ class Main extends React.Component {
                 <Route path="/login" component={LogIn} exact/>
                 <Route path="/register" component={SignUp} exact/>
                 <Route path="/details" component={ProductDetails} exact/>
+                <Route path="/cart" component={UserCart} exact/>
                 <Footer/>
             </div>
         )
     }
 }
 
-export default Main
+export default connect(null, { keepLogin })(Main)

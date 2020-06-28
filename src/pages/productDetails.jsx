@@ -1,5 +1,7 @@
 import React from 'react'
 import Axios from 'axios'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import Slider from 'react-slick'
 import { Button, IconButton, Paper } from '@material-ui/core'
 
@@ -20,7 +22,8 @@ class ProductDeatils extends React.Component {
             stock : null,
             clicked : null,
             total : 0,
-            alert : [false, ""]
+            alert : [false, ""],
+            redirect : false
         }
     }
 
@@ -43,25 +46,35 @@ class ProductDeatils extends React.Component {
     }
 
     handleAddToCart = () => {
-        const { total, stock } = this.state
+        const { product, total, stock, clicked } = this.state
 
         // check quantity total
         if (total === 0 || stock === null) return this.setState({alert : [true, "Please choose size that you want and give a total quantity."]})
 
         // check quantity and stock
-        if (total > stock) return this.setState({alert : [true, "Product stock doesn\'t enough."]})
+        if (total > stock) return this.setState({alert : [true, "Product stock doesn't enough."]})
 
-        //  give confirmation
-        this.setState({alert : [true, "Click Ok to confirm."]})
+        // post add to cart data
+        Axios.patch(URL + `/users?id=${this.props.id}`, {cart : [{            
+            product : product.name,
+            brand : product.brand,
+            color : product.colour,
+            price : product.price,
+            size : product.stock[clicked].code,
+            qty : total}]})
+        .then(res => {
+            console.log(res.data)
+            this.setState({redirect : true})
+        })
+        .catch(err => console.log(err))
     }
 
-    handleOk = () => {
-        // console.log("handle ok")
+    handleClose = () => {
         this.setState({alert : [false, '']})
     }
 
     render () {
-        const { product, stock, clicked, total, alert } = this.state
+        const { product, stock, clicked, total, alert, redirect } = this.state
         // console.log(stock)
 
         const settings = {
@@ -83,6 +96,10 @@ class ProductDeatils extends React.Component {
             prevArrow : <PrevArrow/>
         }
 
+        if (redirect) {
+            return <Redirect to='/cart'/>
+        }
+
         return (
             <div style={styles.root}>
                 <h1 style={styles.title}>{product.name}</h1>
@@ -96,6 +113,7 @@ class ProductDeatils extends React.Component {
                         <h1 style={styles.info}>{product.category}</h1>
                         <h1 style={styles.info}>Brand : {product.brand}</h1>
                         <h1 style={styles.info}>Color : {product.colour}</h1>
+                        <h1 style={styles.info}>Price : Rp. {product.price},00</h1>
                         <h1 style={styles.info}>Description : </h1>
                         <h1 style={styles.description}>{product.description}</h1>
                         <div>
@@ -148,8 +166,8 @@ class ProductDeatils extends React.Component {
                 <Alert 
                     open={alert[0]} 
                     title={`⚠ ${alert[1]}`}
-                    handleClose={ _ => this.setState({alert : [false, '']})}
-                    handleOk={this.handleOk}
+                    handleClose={this.handleClose}
+                    handleOk={this.handleClose}
                 />
             </div>
         )
@@ -161,7 +179,7 @@ const styles = {
         height : 'auto',
         width : '100%',
         backgroundColor : '#f2f2f2',
-        padding : '90px 10%',
+        padding : '90px 10% 3% 10%',
     },
     title : {
         fontWeight : 'bold',
@@ -182,7 +200,7 @@ const styles = {
     rightContent : {
         flexBasis : '50%',
         height : '70vh',
-        padding : '4%',
+        padding : '3.5% 4%',
         display : 'flex',
         flexDirection : 'column',
         position : 'relative'
@@ -286,4 +304,10 @@ function PrevArrow (props) {
     )
 }
 
-export default ProductDeatils
+const mapStore = ({user}) => {
+    return {
+        id : user.id
+    }
+}
+
+export default connect(mapStore)(ProductDeatils)

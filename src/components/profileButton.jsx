@@ -36,6 +36,12 @@ class ProfileButton extends React.Component {
         this.setState({anchorEl : null})
     }
 
+    handleLogOut = () => {
+        localStorage.clear()
+        this.props.logOut()
+        this.handleClose()
+    }
+
     render () {
         return (
             <div>
@@ -94,19 +100,21 @@ class ProfileButton extends React.Component {
                             </ListItemIcon>
                         <ListItemText style={styles.text}>Profile</ListItemText>
                     </MenuItem>
-                    <MenuItem style={styles.menuItem} onClick={this.handleClose}>
-                        <ListItemIcon>
-                                <ShoppingBasketIcon/>
-                            </ListItemIcon>
-                        <ListItemText style={styles.text}>Cart</ListItemText>
-                    </MenuItem>
+                    <Link to='/cart' style={styles.link}>
+                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
+                            <ListItemIcon>
+                                    <ShoppingBasketIcon/>
+                                </ListItemIcon>
+                            <ListItemText style={styles.text}>Cart</ListItemText>
+                        </MenuItem>
+                    </Link>
                     <MenuItem style={styles.menuItem} onClick={this.handleClose}>
                         <ListItemIcon>
                                 <HistoryIcon/>
                             </ListItemIcon>
                         <ListItemText style={styles.text}>History</ListItemText>
                     </MenuItem>
-                    <MenuItem style={styles.menuItem} onClick={() => {this.props.logOut(); this.handleClose();}}>
+                    <MenuItem style={styles.menuItem} onClick={this.handleLogOut}>
                         <ListItemIcon>
                                 <ExitToAppIcon/>
                             </ListItemIcon>

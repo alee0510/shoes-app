@@ -4,7 +4,8 @@ const INITIAL_STATE = {
     id : null,
     username : null,
     email : null,
-    role : null
+    role : null,
+    cart : []
 }
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -15,7 +16,8 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                 id : action.payload.id,
                 username : action.payload.username, 
                 email : action.payload.email,
-                role : action.payload.role
+                role : action.payload.role,
+                cart : action.payload.cart
             }
         case LOG_OUT :
             return INITIAL_STATE

@@ -513,28 +513,17 @@
       "username": "admin",
       "password": "admin",
       "role": "admin",
-      "email": "admin@shoes.com"
+      "email": "admin@shoes.com",
+      "cart" : []
     },
     {
       "id": 2,
       "username": "user",
       "password": "user",
       "role": "user",
-      "email": "user@gmail.com"
-    },
-    {
-      "username": "alee0510",
-      "password": "@alee0510",
-      "email": "alee0510@gmail.com",
-      "role": "user",
-      "id": 3
-    },
-    {
-      "username": "adajkfaf",
-      "password": "alee0510@",
-      "email": "anlkanflkaf",
-      "role": "user",
-      "id": 4
+      "email": "user@gmail.com",
+      "cart" : []
     }
-  ]
+  ],
+  "transaction_histories": []
 }
