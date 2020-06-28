@@ -1,6 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import {
     Table,
     TableHead,
@@ -22,7 +22,7 @@ class UserCart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data : [],
+            cart : [],
             alert : false
         }
     }
@@ -32,16 +32,21 @@ class UserCart extends React.Component {
     }
 
     getData = () => {
-        Axios.get(URL + `/cart?userId=${localStorage.getItem('id')}`)
+        Axios.get(URL + `/users?id=${localStorage.getItem('id')}`)
         .then(res => {
             console.log(res.data)
-            this.setState({ data : res.data })
+            this.setState({ cart : res.data[0].cart, alert : false })
         })
         .catch(err => console.log(err))
     }
 
-    handleDelete = (id) => {
-        Axios.delete(URL + `/cart/${id}`)
+    handleDelete = (index) => {
+        console.log(index)
+        let tempCart = this.state.cart
+        tempCart.splice(index, 1)
+        
+        // update database
+        Axios.patch(URL + `/users/${this.props.id}`, { cart : tempCart })
         .then(res => {
             console.log(res.data)
             this.getData()
@@ -50,14 +55,27 @@ class UserCart extends React.Component {
     }
 
     hanldeOk = () => {
-        Axios.post(URL + `/transaction_histories`, {
-            userId : localStorage.getItem('id'),
-            date : new Date().getDate(),
-            transaction : this.state.data,
-            total : this.state.data.map(item => item.qty * item.price).reduce((a, b) => a + b)
-        })
+        let history = {
+            userId : this.props.id,
+            date : new Date().toLocaleDateString(),
+            total : this.state.cart.map(item => item.qty * item.price).reduce((a, b) => a + b),
+            transactions : this.state.cart
+        }
+        console.log(history)
+
+        // update database
+        Axios.post(URL + '/transaction_histories', history)
         .then(res => {
             console.log(res.data)
+
+            // delete user cart
+            Axios.patch(URL + `/users/${this.props.id}`, { cart : [] })
+            .then(res => {
+                console.log(res.data)
+
+                // update data
+                this.getData()
+            })
         })
         .catch(err => console.log(err))
     }
@@ -79,8 +97,8 @@ class UserCart extends React.Component {
     )
 
     renderTableContents = () => {
-        return this.state.data.map((item, index) => (
-            <TableRow key={item.id}>
+        return this.state.cart.map((item, index) => (
+            <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{item.product}</TableCell>
                 <TableCell>{item.brand}</TableCell>
@@ -93,7 +111,7 @@ class UserCart extends React.Component {
                     <Button
                         startIcon={<DeleteIcon/>}
                         style={styles.deleteButton}
-                        onClick={ _ => this.handleDelete(item.id)}
+                        onClick={ _ => this.handleDelete(index)}
                     >
                         Delete
                     </Button>
@@ -156,7 +174,8 @@ const styles = {
     deleteButton : {
         backgroundColor : '#EA2027',
         color : 'white',
-        borderRadius : 0
+        borderRadius : 0,
+        padding : '10px 20px'
     },
     checkOutButton : {
         backgroundColor : '#130f40',
@@ -172,4 +191,10 @@ const styles = {
     }
 }
 
-export default UserCart
+const mapStore = ({user}) => {
+    return {
+        id : user.id
+    }
+}
+
+export default connect(mapStore)(UserCart)

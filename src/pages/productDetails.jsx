@@ -55,13 +55,17 @@ class ProductDeatils extends React.Component {
         if (total > stock) return this.setState({alert : [true, "Product stock doesn't enough."]})
 
         // post add to cart data
-        Axios.patch(URL + `/users?id=${this.props.id}`, {cart : [{            
+        let tempCart = this.props.cart
+        tempCart.push({
             product : product.name,
             brand : product.brand,
             color : product.colour,
             price : product.price,
             size : product.stock[clicked].code,
-            qty : total}]})
+            qty : total
+        })
+
+        Axios.patch(URL + `/users/${this.props.id}`, {cart : tempCart})
         .then(res => {
             console.log(res.data)
             this.setState({redirect : true})
@@ -306,7 +310,8 @@ function PrevArrow (props) {
 
 const mapStore = ({user}) => {
     return {
-        id : user.id
+        id : user.id,
+        cart : user.cart
     }
 }
 

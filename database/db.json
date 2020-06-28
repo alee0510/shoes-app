@@ -514,7 +514,7 @@
       "password": "admin",
       "role": "admin",
       "email": "admin@shoes.com",
-      "cart" : []
+      "cart": []
     },
     {
       "id": 2,
@@ -522,8 +522,25 @@
       "password": "user",
       "role": "user",
       "email": "user@gmail.com",
-      "cart" : []
+      "cart": []
     }
   ],
-  "transaction_histories": []
+  "transaction_histories": [
+    {
+      "userId": 2,
+      "date": "6/28/2020",
+      "total": 1987300,
+      "transactions": [
+        {
+          "product": "NIKE W AIR MAX 90",
+          "brand": "NIKE",
+          "color": "WHITE/PARTICLE GREY-ROSE-BLACK",
+          "price": 1987300,
+          "size": 39,
+          "qty": 1
+        }
+      ],
+      "id": 1
+    }
+  ]
 }
