@@ -68,7 +68,7 @@ class ProfileButton extends React.Component {
                     style={styles.menu}
                 >
                 {   !this.props.username ?
-                    <>
+                    <div>
                     <Link to='/login' style={styles.link}>
                         <MenuItem style={styles.menuItem} onClick={this.handleClose}>
                             <ListItemIcon>
@@ -85,9 +85,9 @@ class ProfileButton extends React.Component {
                             <ListItemText style={styles.text}>Register</ListItemText>
                         </MenuItem>
                     </Link>
-                    </>
+                    </div>
                     :
-                    <>
+                    <div>
                     <MenuItem style={styles.menuItem} onClick={this.handleClose}>
                         <ListItemIcon>
                                 <FaceIcon/>
@@ -112,7 +112,7 @@ class ProfileButton extends React.Component {
                             </ListItemIcon>
                         <ListItemText style={styles.text}>Logout</ListItemText>
                     </MenuItem>
-                    </>
+                    </div>
                 }
                 </Menu>
             </div>

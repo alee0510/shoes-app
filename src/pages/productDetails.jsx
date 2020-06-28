@@ -10,20 +10,24 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 import { URL } from '../actions/helper'
 import '../styles/details.css'
 
+import Alert from '../components/alert'
+
 class ProductDeatils extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
             product : {},
             stock : null,
-            clicked : null
+            clicked : null,
+            total : 0,
+            alert : [false, ""]
         }
     }
 
     componentDidMount () {
         Axios.get(URL + `/products${this.props.location.search}`)
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({product : res.data[0]})
         })
         .catch(err => console.log(err))
@@ -38,9 +42,27 @@ class ProductDeatils extends React.Component {
         ))
     }
 
+    handleAddToCart = () => {
+        const { total, stock } = this.state
+
+        // check quantity total
+        if (total === 0 || stock === null) return this.setState({alert : [true, "Please choose size that you want and give a total quantity."]})
+
+        // check quantity and stock
+        if (total > stock) return this.setState({alert : [true, "Product stock doesn\'t enough."]})
+
+        //  give confirmation
+        this.setState({alert : [true, "Click Ok to confirm."]})
+    }
+
+    handleOk = () => {
+        // console.log("handle ok")
+        this.setState({alert : [false, '']})
+    }
+
     render () {
-        const { product, stock, clicked } = this.state
-        console.log(stock)
+        const { product, stock, clicked, total, alert } = this.state
+        // console.log(stock)
 
         const settings = {
             dots: true,
@@ -52,7 +74,7 @@ class ProductDeatils extends React.Component {
                 <div><ul style={styles.ul}>{dots}</ul></div>
             ),
             customPaging : i => (
-                <a>
+                <a href="#">
                     <img src={product.images[i]} alt='details' height='100%'/>
                 </a>
             ),
@@ -65,7 +87,7 @@ class ProductDeatils extends React.Component {
             <div style={styles.root}>
                 <h1 style={styles.title}>{product.name}</h1>
                 <Paper style={styles.container} elevation={1}>
-                    <Paper style={styles.leftContent} elevation={0}>
+                    <Paper style={styles.leftContent} elevation={3}>
                         <Slider {...settings} style={styles.slider}>
                             {this.renderDetails(product.images || [])}
                         </Slider>
@@ -74,7 +96,8 @@ class ProductDeatils extends React.Component {
                         <h1 style={styles.info}>{product.category}</h1>
                         <h1 style={styles.info}>Brand : {product.brand}</h1>
                         <h1 style={styles.info}>Color : {product.colour}</h1>
-                        <h1 style={styles.info}>Description : {product.description}</h1>
+                        <h1 style={styles.info}>Description : </h1>
+                        <h1 style={styles.description}>{product.description}</h1>
                         <div>
                             <h1 style={styles.info}>Size : </h1>
                             {
@@ -87,27 +110,47 @@ class ProductDeatils extends React.Component {
                                             ...styles.stock, 
                                             color : index === clicked ? 'white' : '#130f40'
                                         }}
-                                        onClick={() => this.setState({stock : item.total, clicked : index})}
+                                        onClick={ _ => this.setState({stock : item.total, clicked : index})}
                                     >{item.code}</Button>
                                 ))
                             }
                         </div>
                         <h5 style={styles.stcokInfo}>{stock !== null ? `* stock < ${stock}` : ''}</h5>
-                        <div>
-                            <Button>+</Button>
-                            <h1>0</h1>
-                            <Button>-</Button>
+                        <div style={styles.total}>
+                            <Button 
+                                variant="contained" 
+                                style={styles.totalButton} 
+                                onClick={ _ => this.setState({total : total-1})}
+                                disabled={total <= 0 ? true : false}
+                            >
+                                -
+                            </Button>
+                            <h1 style={styles.totalInfo}>{total}</h1>
+                            <Button 
+                                variant="contained" 
+                                style={styles.totalButton} 
+                                onClick={ _ => this.setState({total : total+1})}
+                            >
+                                +
+                            </Button>
                         </div>
                         <Button 
                             variant="contained" 
                             color="primary" 
                             startIcon={<ShoppingCartIcon/>}
                             style={styles.addToCart}
+                            onClick={this.handleAddToCart}
                         >
                             Add to Cart
                         </Button>
                     </div>
                 </Paper>
+                <Alert 
+                    open={alert[0]} 
+                    title={`⚠ ${alert[1]}`}
+                    handleClose={ _ => this.setState({alert : [false, '']})}
+                    handleOk={this.handleOk}
+                />
             </div>
         )
     }
@@ -118,12 +161,12 @@ const styles = {
         height : 'auto',
         width : '100%',
         backgroundColor : '#f2f2f2',
-        padding : '7% 10% 3% 10%',
+        padding : '90px 10%',
     },
     title : {
         fontWeight : 'bold',
         fontSize : 32,
-        marginBottom : '1%'
+        margin : '2% 0px'
     },
     container : {
         height : 'auto',
@@ -139,8 +182,7 @@ const styles = {
     rightContent : {
         flexBasis : '50%',
         height : '70vh',
-        backgroundColor : 'yellow',
-        padding : '3%',
+        padding : '4%',
         display : 'flex',
         flexDirection : 'column',
         position : 'relative'
@@ -151,7 +193,6 @@ const styles = {
         position : 'relative'
     },
     ul : {
-        backgroundColor : 'white', 
         height : '100%',
         width : '100%',
         display : 'flex',
@@ -182,7 +223,12 @@ const styles = {
         color : '#130f40'
     },
     info : {
-        fontSize : 18,
+        fontSize : 17,
+        fontWeight : 700,
+        marginBottom : '3%'
+    },
+    description : {
+        fontSize : 14,
         fontWeight : 700,
         marginBottom : '4%'
     },
@@ -205,6 +251,20 @@ const styles = {
     stcokInfo : {
         fontSize : 14,
         color : '#EA2027'
+    },
+    total : {
+        display : 'flex',
+        alignItems : 'center',
+        marginTop : '3%'
+    },
+    totalButton : {
+        height : 50,
+        width : 40,
+        backgroundColor : 'white',
+        fontSize : 32
+    },
+    totalInfo : {
+        margin : '0px 5%'
     }
 }
 

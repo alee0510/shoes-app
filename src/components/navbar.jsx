@@ -11,11 +11,6 @@ import { LOGO } from '../assets'
 import ProfileButton from '../components/profileButton'
 
 class Navbar extends React.Component {
-    componentDidMount () {
-        console.log('navbar run')
-        console.log(localStorage.getItem('id'))
-    }
-
     render () {
         return (
             <AppBar position="fixed" style={styles.root} elevation={0}>

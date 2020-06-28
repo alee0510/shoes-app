@@ -12,11 +12,6 @@ import SignUp from './pages/register'
 import ProductDetails from './pages/productDetails'
 
 class Main extends React.Component {
-    componentDidMount () {
-        console.log('main run')
-        // console.log(localStorage.getItem('id'))
-    }
-
     render () {
         return (
             <div>
