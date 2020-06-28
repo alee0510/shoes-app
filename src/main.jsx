@@ -12,6 +12,7 @@ import LogIn from './pages/login'
 import SignUp from './pages/register'
 import ProductDetails from './pages/productDetails'
 import UserCart from './pages/userCart'
+import History from './pages/history'
 
 // import actions
 import { keepLogin } from './actions'
@@ -30,6 +31,7 @@ class Main extends React.Component {
                 <Route path="/register" component={SignUp} exact/>
                 <Route path="/details" component={ProductDetails} exact/>
                 <Route path="/cart" component={UserCart} exact/>
+                <Route path="/history" component={History} exact/>
                 <Footer/>
             </div>
         )

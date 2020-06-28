@@ -1,7 +1,6 @@
 import React from 'react'
 import {
     Dialog,
-    // DialogTitle,
     DialogContent,
     DialogContentText,
     DialogActions,
@@ -17,7 +16,6 @@ function Alert (props) {
             aria-describedby="alert-dialog-description"
             style={styles.root}
         >
-            {/* <DialogTitle id="alert-dialog-title" style={styles.title}>{props.title}</DialogTitle> */}
             <DialogContent>
                 <DialogContentText id="alert-dialog-description" style={styles.title}>
                     {props.title}

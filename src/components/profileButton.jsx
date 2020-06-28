@@ -109,12 +109,14 @@ class ProfileButton extends React.Component {
                             <ListItemText style={styles.text}>Cart</ListItemText>
                         </MenuItem>
                     </Link>
-                    <MenuItem style={styles.menuItem} onClick={this.handleClose}>
-                        <ListItemIcon>
-                                <HistoryIcon/>
-                            </ListItemIcon>
-                        <ListItemText style={styles.text}>History</ListItemText>
-                    </MenuItem>
+                    <Link to='/history' style={styles.link}>
+                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
+                            <ListItemIcon>
+                                    <HistoryIcon/>
+                                </ListItemIcon>
+                            <ListItemText style={styles.text}>History</ListItemText>
+                        </MenuItem>
+                    </Link>
                     <Link to='/' style={styles.link}>
                         <MenuItem style={styles.menuItem} onClick={this.handleLogOut}>
                             <ListItemIcon>
