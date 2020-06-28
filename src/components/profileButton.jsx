@@ -23,7 +23,8 @@ class ProfileButton extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-            anchorEl : null
+            anchorEl : null,
+            logOut : false
         }
     }
 
@@ -38,8 +39,8 @@ class ProfileButton extends React.Component {
 
     handleLogOut = () => {
         localStorage.clear()
+        this.setState({anchorEl : null, logOut : true})
         this.props.logOut()
-        this.handleClose()
     }
 
     render () {
@@ -51,9 +52,9 @@ class ProfileButton extends React.Component {
                     onClick={(e) => this.handleClick(e)}
                 >
                     {
-                        this.props.username ? 
-                        <Avatar style={{background : '#130f40'}}>{this.props.username.charAt(0).toUpperCase()}</Avatar> : 
-                        <Avatar>U</Avatar>
+                        !this.props.username ? 
+                        <Avatar>U</Avatar> :
+                        <Avatar style={{background : '#130f40'}}>{this.props.username.charAt(0).toUpperCase()}</Avatar>
                     }
                 </IconButton>
                 <Menu
@@ -114,12 +115,14 @@ class ProfileButton extends React.Component {
                             </ListItemIcon>
                         <ListItemText style={styles.text}>History</ListItemText>
                     </MenuItem>
-                    <MenuItem style={styles.menuItem} onClick={this.handleLogOut}>
-                        <ListItemIcon>
-                                <ExitToAppIcon/>
-                            </ListItemIcon>
-                        <ListItemText style={styles.text}>Logout</ListItemText>
-                    </MenuItem>
+                    <Link to='/' style={styles.link}>
+                        <MenuItem style={styles.menuItem} onClick={this.handleLogOut}>
+                            <ListItemIcon>
+                                    <ExitToAppIcon/>
+                                </ListItemIcon>
+                            <ListItemText style={styles.text}>Logout</ListItemText>
+                        </MenuItem>
+                    </Link>
                     </div>
                 }
                 </Menu>
