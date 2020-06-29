@@ -16,6 +16,7 @@ import FaceIcon from '@material-ui/icons/Face'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 import HistoryIcon from '@material-ui/icons/History'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import DashboardIcon from '@material-ui/icons/Dashboard'
 
 import { logOut } from '../actions'
 
@@ -74,24 +75,24 @@ class ProfileButton extends React.Component {
                     }}
                     style={styles.menu}
                 >
-                {   !this.props.username ?
+                {   this.props.username ? this.props.role === 'admin'?
                     <div>
-                    <Link to='/login' style={styles.link}>
-                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
-                            <ListItemIcon>
-                                <MeetingRoomIcon/>
-                            </ListItemIcon>
-                            <ListItemText style={styles.text}>Login</ListItemText>
-                        </MenuItem>
-                    </Link>
-                    <Link to='/register' style={styles.link}>
-                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
-                            <ListItemIcon>
-                                <PersonAddIcon/>
-                            </ListItemIcon>
-                            <ListItemText style={styles.text}>Register</ListItemText>
-                        </MenuItem>
-                    </Link>
+                        <Link to='/dashboard' style={styles.link}>
+                            <MenuItem style={styles.menuItem}>
+                                <ListItemIcon>
+                                        <DashboardIcon/>
+                                    </ListItemIcon>
+                                <ListItemText style={styles.text}>Dashboard</ListItemText>
+                            </MenuItem>
+                        </Link>
+                        <Link to='/' style={styles.link}>
+                            <MenuItem style={styles.menuItem} onClick={this.handleLogOut}>
+                                <ListItemIcon>
+                                        <ExitToAppIcon/>
+                                    </ListItemIcon>
+                                <ListItemText style={styles.text}>Logout</ListItemText>
+                            </MenuItem>
+                        </Link>
                     </div>
                     :
                     <div>
@@ -126,6 +127,25 @@ class ProfileButton extends React.Component {
                         </MenuItem>
                     </Link>
                     </div>
+                    :
+                    <div>
+                    <Link to='/login' style={styles.link}>
+                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
+                            <ListItemIcon>
+                                <MeetingRoomIcon/>
+                            </ListItemIcon>
+                            <ListItemText style={styles.text}>Login</ListItemText>
+                        </MenuItem>
+                    </Link>
+                    <Link to='/register' style={styles.link}>
+                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
+                            <ListItemIcon>
+                                <PersonAddIcon/>
+                            </ListItemIcon>
+                            <ListItemText style={styles.text}>Register</ListItemText>
+                        </MenuItem>
+                    </Link>
+                    </div>
                 }
                 </Menu>
             </div>
@@ -151,7 +171,8 @@ const styles = {
 
 const mapStore = ({user}) => {
     return {
-        username : user.username
+        username : user.username,
+        role : user.role
     }
 }
 
