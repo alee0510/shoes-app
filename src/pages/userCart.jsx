@@ -1,6 +1,7 @@
 import React from 'react'
 import Axios from 'axios'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import {
     Table,
     TableHead,
@@ -122,6 +123,11 @@ class UserCart extends React.Component {
 
     render () {
         const { alert } = this.state
+        
+        if (!this.props.id) {
+            return <Redirect to='/'/>
+        }
+
         return (
             <div style={styles.root}>
                 <div style={styles.title}>

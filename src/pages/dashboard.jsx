@@ -1,7 +1,5 @@
 import React from 'react'
 import Axios from 'axios'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import {
     Table,
     TableHead,
@@ -10,18 +8,16 @@ import {
     TableCell,
     Button,
     Dialog,
+    DialogActions,
     DialogContent,
-    DialogContentText,
-    DialogActions
+    DialogContentText
 } from '@material-ui/core'
 
-import HistoryIcon from '@material-ui/icons/History'
+import DashboardIcon from '@material-ui/icons/Dashboard'
 import InfoIcon from '@material-ui/icons/Info'
 
-import { URL } from '../actions/helper'
-
-class History extends React.Component {
-    constructor(props) {
+class Dashboard extends React.Component {
+    constructor (props) {
         super(props)
         this.state = {
             data : [],
@@ -31,12 +27,11 @@ class History extends React.Component {
     }
 
     componentDidMount () {
-        Axios.get(URL + `/transaction_histories?userId=${localStorage.getItem('id')}`)
+        Axios.get('http://localhost:2000/transaction_histories')
         .then(res => {
-            console.log(res.data)
             this.setState({data : res.data})
         })
-        .catch(err => console.log(err))    
+        .catch(err => console.log(err))
     }
 
     handleClose = () => {
@@ -51,6 +46,7 @@ class History extends React.Component {
         <TableHead>
             <TableRow>
                 <TableCell style={styles.tableHead}>No</TableCell>
+                <TableCell style={styles.tableHead}>User ID</TableCell>
                 <TableCell style={styles.tableHead}>Date</TableCell>
                 <TableCell style={styles.tableHead}>Total</TableCell>
                 <TableCell style={styles.tableHead}>Action</TableCell>
@@ -62,6 +58,7 @@ class History extends React.Component {
         return this.state.data.map((item, index) => (
             <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
+                <TableCell>{item.userId}</TableCell>
                 <TableCell>{item.date}</TableCell>
                 <TableCell>{item.total}</TableCell>
                 <TableCell>
@@ -93,16 +90,11 @@ class History extends React.Component {
 
     render () {
         const { alert  } = this.state
-
-        if (!this.props.username) {
-            return <Redirect to='/'/>
-        }
-
         return (
             <div style={styles.root}>
                 <div style={styles.title}>
-                    <HistoryIcon fontSize="large"/>
-                    <h1 style={styles.subTitle}>Transaction History</h1>
+                    <DashboardIcon fontSize="large"/>
+                    <h1 style={styles.subTitle}>Admin Dashboard</h1>
                 </div>
                 <Table>
                     {this.renderTableHead()}
@@ -142,17 +134,17 @@ class History extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
-            </div>
+            </div>           
         )
     }
 }
 
 const styles = {
     root : {
-        width : '100%',
         height : 'calc(100vh - 70px)',
+        width : '100%',
         backgroundColor : '#f2f2f2',
-        padding : '90px 10% 3% 10%'
+        padding : '90px 10% 3% 10%',
     },
     title : {
         display : 'flex',
@@ -172,10 +164,4 @@ const styles = {
     }
 }
 
-const mapStore = ({user}) => {
-    return {
-        username : user.username
-    }
-}
-
-export default connect(mapStore)(History)
+export default Dashboard

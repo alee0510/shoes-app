@@ -23,7 +23,8 @@ class ProductDeatils extends React.Component {
             clicked : null,
             total : 0,
             alert : [false, ""],
-            redirect : false
+            redirect : false,
+            toLogin : false
         }
     }
 
@@ -47,6 +48,9 @@ class ProductDeatils extends React.Component {
 
     handleAddToCart = () => {
         const { product, total, stock, clicked } = this.state
+
+        // check if user already login
+        if (!this.props.username) return this.setState({toLogin : true})
 
         // check quantity total
         if (total === 0 || stock === null) return this.setState({alert : [true, "Please choose size that you want and give a total quantity."]})
@@ -78,7 +82,7 @@ class ProductDeatils extends React.Component {
     }
 
     render () {
-        const { product, stock, clicked, total, alert, redirect } = this.state
+        const { product, stock, clicked, total, alert, redirect, toLogin } = this.state
         // console.log(stock)
 
         const settings = {
@@ -102,6 +106,8 @@ class ProductDeatils extends React.Component {
 
         if (redirect) {
             return <Redirect to='/cart'/>
+        } else if (toLogin) {
+            return <Redirect to='/login'/>
         }
 
         return (
@@ -262,7 +268,7 @@ const styles = {
         fontWeigth : 'bold'
     },
     addToCart : {
-        width : '50%',
+        width : '40%',
         borderRadius : 0,
         padding : '2% 0px',
         backgroundColor : '#130f40',

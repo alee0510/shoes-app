@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 // import components
@@ -13,9 +13,13 @@ import SignUp from './pages/register'
 import ProductDetails from './pages/productDetails'
 import UserCart from './pages/userCart'
 import History from './pages/history'
+import Dashboard from './pages/dashboard'
+import Page404 from './pages/404'
 
 // import actions
 import { keepLogin } from './actions'
+
+import PrivateRoute from './privateRoute'
 
 class Main extends React.Component {
     componentDidMount () {
@@ -26,12 +30,16 @@ class Main extends React.Component {
         return (
             <div>
                 <Navbar/>
-                <Route path="/" component={Home} exact/>
-                <Route path="/login" component={LogIn} exact/>
-                <Route path="/register" component={SignUp} exact/>
-                <Route path="/details" component={ProductDetails} exact/>
-                <Route path="/cart" component={UserCart} exact/>
-                <Route path="/history" component={History} exact/>
+                <Switch>
+                    <Route path="/" component={Home} exact/>
+                    <Route path="/login" component={LogIn}/>
+                    <Route path="/register" component={SignUp}/>
+                    <Route path="/details" component={ProductDetails}/>
+                    <Route path="/cart" component={UserCart}/>
+                    <Route path="/history" component={History}/>
+                    <PrivateRoute path='/dashboard' component={Dashboard}/>
+                    <Route path='*' component={Page404}/>
+                </Switch>
                 <Footer/>
             </div>
         )

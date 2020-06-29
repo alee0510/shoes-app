@@ -541,6 +541,22 @@
         }
       ],
       "id": 1
+    },
+    {
+      "userId": 2,
+      "date": "6/29/2020",
+      "total": 1780000,
+      "transactions": [
+        {
+          "product": "NIKE KYRIE 6",
+          "brand": "NIKE",
+          "color": "WHITE/BLUE FURY-OPTI YELLOW-DIGITAL PINK",
+          "price": 1780000,
+          "size": 38,
+          "qty": 1
+        }
+      ],
+      "id": 2
     }
   ]
 }
