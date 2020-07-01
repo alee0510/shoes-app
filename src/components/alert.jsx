@@ -16,7 +16,7 @@ function Alert (props) {
             aria-describedby="alert-dialog-description"
             style={styles.root}
         >
-            <DialogContent>
+            <DialogContent style={{width : '90vw'}}>
                 <DialogContentText id="alert-dialog-description" style={styles.title}>
                     {props.title}
                 </DialogContentText>

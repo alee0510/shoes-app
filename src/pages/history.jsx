@@ -115,10 +115,11 @@ class History extends React.Component {
                     onClose={this.handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
+                    maxWidth={'80vw'}
                 >
                     <DialogContent style ={{margin : 0, padding : 0}}>
                         <DialogContentText id="alert-dialog-description">
-                            <Table style={{width : '100%'}}>
+                            <Table >
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>No</TableCell>

@@ -525,5 +525,23 @@
       "cart": []
     }
   ],
-  "transaction_histories": []
+  "transaction_histories": [
+    {
+      "userId": 2,
+      "date": "7/1/2020",
+      "total": 1500000,
+      "transactions": [
+        {
+          "product": "JORDAN WESTBROOK ONE TAKE",
+          "brand": "JORDAN",
+          "color": "WHITE/WHITE-BLACK-RAGE GREEN",
+          "price": 1500000,
+          "size": 40,
+          "total": 1500000,
+          "qty": 1
+        }
+      ],
+      "id": 1
+    }
+  ]
 }

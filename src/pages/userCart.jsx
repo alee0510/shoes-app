@@ -38,6 +38,11 @@ class UserCart extends React.Component {
         .catch(err => console.log(err))
     }
 
+    handleCheckOut = () => {
+        if (this.props.cart.length === 0) return
+        this.setState({alert : true})
+    }
+
     hanldeOk = () => {
         let history = {
             userId : this.props.id,
@@ -45,7 +50,7 @@ class UserCart extends React.Component {
             total : this.props.cart.map(item => item.total).reduce((a, b) => a + b),
             transactions : this.props.cart
         }
-        console.log(history)
+        // console.log(history)
 
         // update database
         Axios.post(URL + '/transaction_histories', history)
@@ -119,7 +124,7 @@ class UserCart extends React.Component {
                     variant="contained" 
                     style={styles.checkOutButton}
                     startIcon={<CreditCardIcon/>}
-                    onClick={ _ => this.setState({alert : true})}
+                    onClick={this.handleCheckOut}
                 >
                     Check Out
                 </Button>
