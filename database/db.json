@@ -525,5 +525,54 @@
       "cart": []
     }
   ],
-  "transaction_histories": []
+  "transaction_histories": [
+    {
+      "userId": 2,
+      "date": "7/2/2020, 12:28:14 AM",
+      "total": 9741480,
+      "transactions": [
+        {
+          "product": "PUMA CLYDE HARDWOOD RETRO",
+          "brand": "PUMA",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/puma-Clyde_Hardwood_Retro-Puma_White_Orange_Pop-1.jpg",
+          "color": "Puma White-Orange Pop",
+          "price": 2314870,
+          "size": 40,
+          "total": 4629740,
+          "qty": 2
+        },
+        {
+          "product": "VANS UA ERA (MIX & MATCH)",
+          "brand": "VANS",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/vans-UA_Era_Mix__Match-cadmium_yellow_tidepool-1.jpg",
+          "color": "cadmium yellow/tidepool",
+          "price": 678956,
+          "size": 38,
+          "total": 2036868,
+          "qty": 3
+        },
+        {
+          "product": "VANS UA CLASSIC SLIP-ON (BREAST CANCER)",
+          "brand": "VANS",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/vans-UA_Classic_Slip_On_Breast_Cancer-Breast_Cancer_nude_check_true_white-1.jpg",
+          "color": "cadmium yellow/tidepool",
+          "price": 543786,
+          "size": 38,
+          "total": 1087572,
+          "qty": 2
+        },
+        {
+          "product": "NIKE W AIR MAX 90",
+          "brand": "NIKE",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/nike-W_AIR_MAX_90-WHITE_PARTICLE_GREY_ROSE_BLACK-1.jpg",
+          "color": "WHITE/PARTICLE GREY-ROSE-BLACK",
+          "price": 1987300,
+          "size": 38,
+          "total": 1987300,
+          "qty": 1
+        }
+      ],
+      "id": 1
+    }
+  ]
 }

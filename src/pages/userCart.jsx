@@ -7,7 +7,8 @@ import {
     TableBody,
     TableRow,
     TableCell,
-    Button
+    Button,
+    IconButton
 } from '@material-ui/core'
 
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
@@ -16,7 +17,8 @@ import CreditCardIcon from '@material-ui/icons/CreditCard'
 import EditIcon from '@material-ui/icons/Edit'
 import DoneIcon from '@material-ui/icons/Done'
 import ClearIcon from '@material-ui/icons/Clear'
-
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle'
 
 import { URL } from '../actions/helper'
 import { keepLogin } from '../actions'
@@ -138,9 +140,13 @@ class UserCart extends React.Component {
                     {
                         selectedIndex === index ?
                         <div style={styles.qty}>
-                            <Button onClick={this.handleQty}>-</Button>
+                            <IconButton onClick={this.handleQty}>
+                                <RemoveCircleIcon/>
+                            </IconButton>
                             <h5 style={styles.qtyInfo}>{qty}</h5>
-                            <Button onClick={ _ => this.setState({qty : qty + 1})}>+</Button>
+                            <IconButton onClick={ _ => this.setState({qty : qty + 1})}>
+                                <AddCircleIcon/>
+                            </IconButton>
                         </div>
                         :
                         item.qty
