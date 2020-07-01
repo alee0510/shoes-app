@@ -13,6 +13,9 @@ import {
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CreditCardIcon from '@material-ui/icons/CreditCard'
+import EditIcon from '@material-ui/icons/Edit'
+import DoneIcon from '@material-ui/icons/Done'
+import ClearIcon from '@material-ui/icons/Clear'
 
 
 import { URL } from '../actions/helper'
@@ -23,7 +26,9 @@ class UserCart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            alert : false
+            alert : false,
+            selectedIndex : null,
+            qty : null
         }
     }
 
@@ -34,13 +39,45 @@ class UserCart extends React.Component {
         
         // update database
         Axios.patch(URL + `/users/${this.props.id}`, { cart : tempCart })
-        .then(res => this.props.keepLogin())
+        .then(res => {
+            this.props.keepLogin()
+            this.setState({ selectedIndex : null, qty : null})
+        })
+        .catch(err => console.log(err))
+    }
+
+    handleEdit = (index, qty) => {
+        this.setState({selectedIndex : index, qty : qty})
+    }
+
+    handleCancel = () => {
+        this.setState({selectedIndex : null})
+    }
+
+    handleDone = () => {
+        const { selectedIndex, qty } = this.state
+        console.log('done')
+        let tempCart = this.props.cart
+        tempCart[selectedIndex].qty = qty
+        tempCart[selectedIndex].total = qty * tempCart[selectedIndex].price
+
+        // update database
+        Axios.patch(URL + `/users/${this.props.id}`, { cart : tempCart })
+        .then(res => {
+            this.props.keepLogin()
+            this.setState({ selectedIndex : null, qty : null})
+        })
         .catch(err => console.log(err))
     }
 
     handleCheckOut = () => {
         if (this.props.cart.length === 0) return
         this.setState({alert : true})
+    }
+
+
+    handleQty = () => {
+        this.setState({qty : this.state.qty - 1}, _ => this.state.qty === 0 ? this.handleDelete(this.state.selectedIndex) : null )
     }
 
     hanldeOk = () => {
@@ -85,6 +122,7 @@ class UserCart extends React.Component {
     )
 
     renderTableContents = () => {
+        const { selectedIndex, qty } = this.state
         return this.props.cart.map((item, index) => (
             <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
@@ -96,17 +134,57 @@ class UserCart extends React.Component {
                 <TableCell>{item.price}</TableCell>
                 <TableCell>{item.color}</TableCell>
                 <TableCell>{item.size}</TableCell>
-                <TableCell>{item.qty}</TableCell>
-                <TableCell>{item.price}</TableCell>
-                <TableCell>{item.price * item.qty}</TableCell>
                 <TableCell>
-                    <Button
-                        startIcon={<DeleteIcon/>}
-                        style={styles.deleteButton}
-                        onClick={ _ => this.handleDelete(index)}
-                    >
-                        Delete
-                    </Button>
+                    {
+                        selectedIndex === index ?
+                        <div style={styles.qty}>
+                            <Button onClick={this.handleQty}>-</Button>
+                            <h5 style={styles.qtyInfo}>{qty}</h5>
+                            <Button onClick={ _ => this.setState({qty : qty + 1})}>+</Button>
+                        </div>
+                        :
+                        item.qty
+                    }
+                </TableCell>
+                <TableCell>{item.price}</TableCell>
+                <TableCell>{item.price * (qty || item.qty)}</TableCell>
+                <TableCell>
+                    {
+                        selectedIndex === index ?
+                        <>
+                            <Button
+                                startIcon={<DoneIcon/>}
+                                color="primary"
+                                onClick={this.handleDone}
+                            >
+                                Done
+                            </Button>
+                            <Button
+                                startIcon={<ClearIcon/>}
+                                color="primary"
+                                onClick={this.handleCancel}
+                            >
+                                Cancel
+                            </Button>
+                        </>
+                        :
+                        <>
+                            <Button
+                                startIcon={<EditIcon/>}
+                                color="primary"
+                                onClick={ _ => this.handleEdit(index, item.qty)}
+                            >
+                                Edit
+                            </Button>
+                            <Button
+                                startIcon={<DeleteIcon/>}
+                                color="secondary"
+                                onClick={ _ => this.handleDelete(index)}
+                            >
+                                Delete
+                            </Button>
+                        </>
+                    }
                 </TableCell>
             </TableRow>
         ))
@@ -165,7 +243,6 @@ const styles = {
         marginLeft : '1%'
     },
     deleteButton : {
-        backgroundColor : '#EA2027',
         color : 'white',
         borderRadius : 0,
         padding : '10px 20px'
@@ -181,6 +258,13 @@ const styles = {
     tableHead : {
         fontWeight : 600,
         fontSize : 17
+    },
+    qty : {
+        display : 'flex',
+        alignItems : 'center'
+    },
+    qtyInfo : {
+        margin : '0px 20px'
     }
 }
 

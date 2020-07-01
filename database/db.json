@@ -524,26 +524,6 @@
       "email": "user@gmail.com",
       "cart": [
         {
-          "product": "JORDAN WESTBROOK ONE TAKE",
-          "brand": "JORDAN",
-          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
-          "color": "WHITE/WHITE-BLACK-RAGE GREEN",
-          "price": 1500000,
-          "size": 38,
-          "total": 1500000,
-          "qty": 1
-        },
-        {
-          "product": "NIKE KYRIE 6",
-          "brand": "NIKE",
-          "image": "https://kickz.akamaized.net/en/media/images/p/1200/nike-KYRIE_6-WHITE_BLUE_FURY_OPTI_YELLOW_DIGITAL_PINK-1.jpg",
-          "color": "WHITE/BLUE FURY-OPTI YELLOW-DIGITAL PINK",
-          "price": 1780000,
-          "size": 38,
-          "total": 1780000,
-          "qty": 1
-        },
-        {
           "product": "VANS UA ERA (MIX & MATCH)",
           "brand": "VANS",
           "image": "https://kickz.akamaized.net/en/media/images/p/1200/vans-UA_Era_Mix__Match-cadmium_yellow_tidepool-1.jpg",
