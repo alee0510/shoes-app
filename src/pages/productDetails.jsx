@@ -49,11 +49,11 @@ class ProductDeatils extends React.Component {
     handleAddToCart = () => {
         const { product, total, stock, clicked } = this.state
 
-        // check if user already login
-        if (!this.props.username) return this.setState({toLogin : true})
-
         // check quantity total
-        if (total === 0 || stock === null) return this.setState({alert : [true, "Please choose size that you want and give a total quantity."]})
+        if (total === 0 || stock === 0) return this.setState({alert : [true, "Please choose size that you want and give a total quantity."]})
+        
+        // check if user already login
+        if (!this.props.id) return this.setState({toLogin : true})
 
         // post add to cart data
         let tempCart = this.props.cart

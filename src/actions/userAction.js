@@ -6,7 +6,7 @@ export const logIn = (username, password) => {
         try {
             const { data } =  await Axios.get(URL + `/users?username=${username}&password=${password}`)
             localStorage.setItem('id', data[0].id)
-            dispatch({type : LOG_IN, payload : data[0]})
+            dispatch({type : LOG_IN, payload :  data[0]})
         } catch (err) {
             console.log(err)
         }

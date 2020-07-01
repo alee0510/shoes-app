@@ -16,7 +16,7 @@ import CreditCardIcon from '@material-ui/icons/CreditCard'
 
 
 import { URL } from '../actions/helper'
-import { logIn } from '../actions'
+import { keepLogin } from '../actions'
 import Alert from '../components/alert'
 
 class UserCart extends React.Component {
@@ -34,10 +34,7 @@ class UserCart extends React.Component {
         
         // update database
         Axios.patch(URL + `/users/${this.props.id}`, { cart : tempCart })
-        .then(res => {
-            console.log(res.data)
-            this.getData()
-        })
+        .then(res => this.props.keepLogin())
         .catch(err => console.log(err))
     }
 
@@ -53,17 +50,10 @@ class UserCart extends React.Component {
         // update database
         Axios.post(URL + '/transaction_histories', history)
         .then(res => {
-            console.log(res.data)
 
             // delete user cart
             Axios.patch(URL + `/users/${this.props.id}`, { cart : [] })
-            .then(res => {
-                console.log(res.data)
-
-                // update data
-                Axios.get(URL + `/users/${this.props.id}`)
-                .then(res => this.logIn(res.data))
-            })
+            .then(res => this.props.keepLogin())
         })
         .catch(err => console.log(err))
     }
@@ -78,6 +68,7 @@ class UserCart extends React.Component {
                 <TableCell style={styles.tableHead}>Color</TableCell>
                 <TableCell style={styles.tableHead}>Size</TableCell>
                 <TableCell style={styles.tableHead}>Quantity</TableCell>
+                <TableCell style={styles.tableHead}>Price</TableCell>
                 <TableCell style={styles.tableHead}>Total</TableCell>
                 <TableCell style={styles.tableHead}>Action</TableCell>
             </TableRow>
@@ -94,6 +85,7 @@ class UserCart extends React.Component {
                 <TableCell>{item.color}</TableCell>
                 <TableCell>{item.size}</TableCell>
                 <TableCell>{item.qty}</TableCell>
+                <TableCell>{item.price}</TableCell>
                 <TableCell>{item.price * item.qty}</TableCell>
                 <TableCell>
                     <Button
@@ -187,4 +179,4 @@ const mapStore = ({user}) => {
     }
 }
 
-export default connect(mapStore, { logIn })(UserCart)
+export default connect(mapStore, { keepLogin })(UserCart)
