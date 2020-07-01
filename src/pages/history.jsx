@@ -81,6 +81,9 @@ class History extends React.Component {
         return this.state.details.map((item, index) => (
             <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                    <img src={item.image} width="70px" alt="product-img"/>
+                </TableCell>
                 <TableCell>{item.product}</TableCell>
                 <TableCell>{item.brand}</TableCell>
                 <TableCell>{item.color}</TableCell>
@@ -104,7 +107,7 @@ class History extends React.Component {
                     <HistoryIcon fontSize="large"/>
                     <h1 style={styles.subTitle}>Transaction History</h1>
                 </div>
-                <Table>
+                <Table style={{backgroundColor : 'white'}}>
                     {this.renderTableHead()}
                     <TableBody>
                         {this.renderTableContents()}
@@ -115,7 +118,7 @@ class History extends React.Component {
                     onClose={this.handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
-                    maxWidth={'80vw'}
+                    maxWidth={'md'}
                 >
                     <DialogContent style ={{margin : 0, padding : 0}}>
                         <DialogContentText id="alert-dialog-description">
@@ -123,6 +126,7 @@ class History extends React.Component {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>No</TableCell>
+                                        <TableCell>Image</TableCell>
                                         <TableCell>Product</TableCell>
                                         <TableCell>Brand</TableCell>
                                         <TableCell>Color</TableCell>

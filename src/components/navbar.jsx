@@ -1,14 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
     AppBar,
     Toolbar
 } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 import { LOGO } from '../assets'
 import ProfileButton from '../components/profileButton'
+import CartButton from '../components/cartButton'
 
 class Navbar extends React.Component {
     render () {
@@ -23,8 +23,14 @@ class Navbar extends React.Component {
                     </div>
                     <div style={styles.rightContent}>
                         <div style={styles.cart}>
-                            <ShoppingCartIcon/>
-                            <h6 style={styles.cartTotal}>Rp. 0</h6>
+                            <CartButton/>
+                            <h6 style={styles.cartTotal}>
+                                { 
+                                    this.props.cart.length === 0 ?
+                                    'Rp 0, 00' :
+                                    'Rp ' + this.props.cart.map(item => item.total).reduce((a, b) => a + b) + ',00'
+                                }
+                            </h6>
                         </div>
                         <ProfileButton/>
                     </div>
@@ -85,4 +91,10 @@ const styles = {
     }
 }
 
-export default Navbar
+const mapStore = ({user}) => {
+    return {
+        cart : user.cart
+    }
+}
+
+export default connect(mapStore)(Navbar)

@@ -46,7 +46,7 @@ class UserCart extends React.Component {
     hanldeOk = () => {
         let history = {
             userId : this.props.id,
-            date : new Date().toLocaleDateString(),
+            date : new Date().toLocaleString(),
             total : this.props.cart.map(item => item.total).reduce((a, b) => a + b),
             transactions : this.props.cart
         }
@@ -58,7 +58,10 @@ class UserCart extends React.Component {
 
             // delete user cart
             Axios.patch(URL + `/users/${this.props.id}`, { cart : [] })
-            .then(res => this.props.keepLogin())
+            .then(res => {
+                this.props.keepLogin()
+                this.setState({alert : false})
+            })
         })
         .catch(err => console.log(err))
     }
@@ -67,6 +70,7 @@ class UserCart extends React.Component {
         <TableHead>
             <TableRow>
                 <TableCell style={styles.tableHead}>No</TableCell>
+                <TableCell style={styles.tableHead}>Image</TableCell>
                 <TableCell style={styles.tableHead}>Product</TableCell>
                 <TableCell style={styles.tableHead}>Brand</TableCell>
                 <TableCell style={styles.tableHead}>Price</TableCell>
@@ -84,6 +88,9 @@ class UserCart extends React.Component {
         return this.props.cart.map((item, index) => (
             <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                    <img src={item.image} width="70px" alt="product-img"/>
+                </TableCell>
                 <TableCell>{item.product}</TableCell>
                 <TableCell>{item.brand}</TableCell>
                 <TableCell>{item.price}</TableCell>
@@ -114,7 +121,7 @@ class UserCart extends React.Component {
                     <ShoppingBasketIcon fontSize="large"/>
                     <h1 style={styles.subTitle}>User Cart</h1>
                 </div>
-                <Table>
+                <Table style={{backgroundColor : 'white'}}>
                     {this.renderTableHead()}
                     <TableBody>
                         {this.renderTableContents()}

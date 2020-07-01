@@ -522,26 +522,118 @@
       "password": "user",
       "role": "user",
       "email": "user@gmail.com",
-      "cart": []
+      "cart": [
+        {
+          "product": "JORDAN WESTBROOK ONE TAKE",
+          "brand": "JORDAN",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
+          "color": "WHITE/WHITE-BLACK-RAGE GREEN",
+          "price": 1500000,
+          "size": 38,
+          "total": 1500000,
+          "qty": 1
+        },
+        {
+          "product": "NIKE KYRIE 6",
+          "brand": "NIKE",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/nike-KYRIE_6-WHITE_BLUE_FURY_OPTI_YELLOW_DIGITAL_PINK-1.jpg",
+          "color": "WHITE/BLUE FURY-OPTI YELLOW-DIGITAL PINK",
+          "price": 1780000,
+          "size": 38,
+          "total": 1780000,
+          "qty": 1
+        },
+        {
+          "product": "VANS UA ERA (MIX & MATCH)",
+          "brand": "VANS",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/vans-UA_Era_Mix__Match-cadmium_yellow_tidepool-1.jpg",
+          "color": "cadmium yellow/tidepool",
+          "price": 678956,
+          "size": 38,
+          "total": 678956,
+          "qty": 1
+        }
+      ]
     }
   ],
   "transaction_histories": [
     {
       "userId": 2,
-      "date": "7/1/2020",
+      "date": "7/1/2020, 7:26:08 PM",
+      "total": 1345650,
+      "transactions": [
+        {
+          "product": "ADIDAS PERFORMANCE MARQUEE MID - VEGAS",
+          "brand": "ADIDAS",
+          "color": "legend ink/ftwr white/flash orange",
+          "price": 1345650,
+          "size": 38,
+          "total": 1345650,
+          "qty": 1
+        }
+      ],
+      "id": 1
+    },
+    {
+      "userId": 2,
+      "date": "7/1/2020, 7:26:36 PM",
+      "total": 2036868,
+      "transactions": [
+        {
+          "product": "VANS UA ERA (MIX & MATCH)",
+          "brand": "VANS",
+          "color": "cadmium yellow/tidepool",
+          "price": 678956,
+          "size": 39,
+          "total": 2036868,
+          "qty": 3
+        }
+      ],
+      "id": 2
+    },
+    {
+      "userId": 2,
+      "date": "7/1/2020, 7:26:57 PM",
+      "total": 4487300,
+      "transactions": [
+        {
+          "product": "NIKE W AIR MAX 90",
+          "brand": "NIKE",
+          "color": "WHITE/PARTICLE GREY-ROSE-BLACK",
+          "price": 1987300,
+          "size": 38,
+          "total": 1987300,
+          "qty": 1
+        },
+        {
+          "product": "NIKE AIR ZOOM-TYPE",
+          "brand": "NIKE",
+          "color": "BLACK/SUMMIT WHITE-MENTA-ORANGE TRANCE",
+          "price": 2500000,
+          "size": 38,
+          "total": 2500000,
+          "qty": 1
+        }
+      ],
+      "id": 3
+    },
+    {
+      "userId": 2,
+      "date": "7/1/2020, 8:18:56 PM",
       "total": 1500000,
       "transactions": [
         {
           "product": "JORDAN WESTBROOK ONE TAKE",
           "brand": "JORDAN",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/JORDAN_WESTBROOK_ONE_TAKE-WHITE_WHITE_BLACK_RAGE_GREEN-1.jpg",
           "color": "WHITE/WHITE-BLACK-RAGE GREEN",
           "price": 1500000,
-          "size": 40,
+          "size": 38,
           "total": 1500000,
           "qty": 1
         }
       ],
-      "id": 1
+      "id": 4
     }
   ]
 }

@@ -10,11 +10,15 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText
+    DialogContentText,
+    Select,
+    MenuItem
 } from '@material-ui/core'
 
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import InfoIcon from '@material-ui/icons/Info'
+
+import { URL } from '../actions/helper'
 
 class Dashboard extends React.Component {
     constructor (props) {
@@ -22,14 +26,24 @@ class Dashboard extends React.Component {
         this.state = {
             data : [],
             alert : false,
-            details : []
+            details : [],
+            by : 'id',
+            order : 'asc'
         }
     }
 
     componentDidMount () {
-        Axios.get('http://localhost:2000/transaction_histories')
+        Axios.get(URL + '/transaction_histories')
         .then(res => {
             this.setState({data : res.data})
+        })
+        .catch(err => console.log(err))
+    }
+
+    getSortedData = (by, order) => {
+        Axios.get(URL + `/transaction_histories?_sort=${by}&_order=${order}`)
+        .then(res => {
+            this.setState({data : res.data, by : by, order : order})
         })
         .catch(err => console.log(err))
     }
@@ -40,6 +54,14 @@ class Dashboard extends React.Component {
     
     handleDetails = (data) => {
         this.setState({details : data, alert : true})
+    }
+
+    handleSort = (e) => {
+        this.getSortedData(e.target.value, this.state.order)
+    }
+
+    handleSortProps = (e) => {
+        this.getSortedData(this.state.by, e.target.value)
     }
 
     renderTableHead = () => (
@@ -78,6 +100,9 @@ class Dashboard extends React.Component {
         return this.state.details.map((item, index) => (
             <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                    <img src={item.image} width="70px" alt="product-img"/>
+                </TableCell>
                 <TableCell>{item.product}</TableCell>
                 <TableCell>{item.brand}</TableCell>
                 <TableCell>{item.color}</TableCell>
@@ -89,12 +114,35 @@ class Dashboard extends React.Component {
     }
 
     render () {
-        const { alert  } = this.state
+        const { alert, by, order  } = this.state
         return (
             <div style={styles.root}>
-                <div style={styles.title}>
-                    <DashboardIcon fontSize="large"/>
-                    <h1 style={styles.subTitle}>Admin Dashboard</h1>
+                <div style={styles.header}>
+                    <div style={styles.title}>
+                        <DashboardIcon fontSize="large"/>
+                        <h1 style={styles.subTitle}>Admin Dashboard</h1>
+                    </div>
+                    <div style={styles.sort}>
+                        <h1 style={styles.sortBy}>Sort By</h1>
+                        <Select
+                            value={by}
+                            onChange={(e) => this.handleSort(e)}
+                            disableUnderline = {true}
+                            style={{marginRight : 20}}
+                        >
+                            <MenuItem value={'id'}>ID</MenuItem>
+                            <MenuItem value={'date'}>Date</MenuItem>
+                            <MenuItem value={'total'}>Total</MenuItem>
+                        </Select>
+                        <Select
+                            value={order}
+                            onChange={(e) => this.handleSortProps(e)}
+                            disableUnderline = {true}
+                        >
+                            <MenuItem value={'asc'}>ASC</MenuItem>
+                            <MenuItem value={'desc'}>DESC</MenuItem>
+                        </Select>
+                    </div>
                 </div>
                 <Table>
                     {this.renderTableHead()}
@@ -107,14 +155,15 @@ class Dashboard extends React.Component {
                     onClose={this.handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
-                    maxWidth={'80vw'}
+                    maxWidth={'md'}
                 >
                     <DialogContent style ={{margin : 0, padding : 0}}>
                         <DialogContentText id="alert-dialog-description">
-                            <Table>
+                            <Table style={{backgroundColor : 'white'}}>
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>No</TableCell>
+                                        <TableCell>Image</TableCell>
                                         <TableCell>Product</TableCell>
                                         <TableCell>Brand</TableCell>
                                         <TableCell>Color</TableCell>
@@ -147,9 +196,9 @@ const styles = {
         backgroundColor : '#f2f2f2',
         padding : '90px 10% 3% 10%',
     },
-    title : {
+    header : {
         display : 'flex',
-        alignItems : 'center',
+        justifyContent : 'space-between',
         margin : '2% 0px',
         color : '#130f40'
     },
@@ -162,6 +211,23 @@ const styles = {
     tableHead : {
         fontWeight : 600,
         fontSize : 17
+    },
+    title : {
+        display : 'flex',
+        alignItems : 'center',
+        color : '#130f40',
+        flexBasis : '50%'
+    },
+    sort : {
+        display : 'flex',
+        justifyContent : 'flex-end',
+        alignItems : 'center',
+        color : '#130f40',
+        flexBasis : '50%'
+    },
+    sortBy : {
+        fontSize : 16,
+        marginRight : 20
     }
 }
 

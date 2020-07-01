@@ -37,7 +37,7 @@ class Main extends React.Component {
                     <Route path="/details" component={ProductDetails}/>
                     <Route path="/cart" component={UserCart}/>
                     <Route path="/history" component={History}/>
-                    <PrivateRoute path='/dashboard' component={Dashboard}/>
+                    <Route path='/dashboard' component={Dashboard}/>
                     <Route path='*' component={Page404}/>
                 </Switch>
                 <Footer/>

@@ -10,6 +10,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 
 import { URL } from '../actions/helper'
+import { keepLogin } from '../actions'
 import '../styles/details.css'
 
 import Alert from '../components/alert'
@@ -60,6 +61,7 @@ class ProductDeatils extends React.Component {
         tempCart.push({
             product : product.name,
             brand : product.brand,
+            image : product.images[0],
             color : product.colour,
             price : product.price,
             size : product.stock[clicked].code,
@@ -69,7 +71,8 @@ class ProductDeatils extends React.Component {
 
         Axios.patch(URL + `/users/${this.props.id}`, {cart : tempCart})
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
+            this.props.keepLogin()
             this.setState({toCart : true})
         })
         .catch(err => console.log(err))
@@ -320,4 +323,4 @@ const mapStore = ({user}) => {
     }
 }
 
-export default connect(mapStore)(ProductDeatils)
+export default connect(mapStore, { keepLogin })(ProductDeatils)
