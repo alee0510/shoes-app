@@ -2,8 +2,8 @@ import React from 'react'
 import Axios from 'axios'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import Slider from 'react-slick'
 import { Button, IconButton, Paper } from '@material-ui/core'
+import Slider from 'react-slick'
 
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
@@ -19,11 +19,11 @@ class ProductDeatils extends React.Component {
         super(props)
         this.state = {
             product : {},
-            stock : null,
+            stock : 0,
             clicked : null,
             total : 0,
             alert : [false, ""],
-            redirect : false,
+            toCart : false,
             toLogin : false
         }
     }
@@ -55,9 +55,6 @@ class ProductDeatils extends React.Component {
         // check quantity total
         if (total === 0 || stock === null) return this.setState({alert : [true, "Please choose size that you want and give a total quantity."]})
 
-        // check quantity and stock
-        if (total > stock) return this.setState({alert : [true, "Product stock doesn't enough."]})
-
         // post add to cart data
         let tempCart = this.props.cart
         tempCart.push({
@@ -66,13 +63,14 @@ class ProductDeatils extends React.Component {
             color : product.colour,
             price : product.price,
             size : product.stock[clicked].code,
+            total : total * product.price,
             qty : total
         })
 
         Axios.patch(URL + `/users/${this.props.id}`, {cart : tempCart})
         .then(res => {
             console.log(res.data)
-            this.setState({redirect : true})
+            this.setState({toCart : true})
         })
         .catch(err => console.log(err))
     }
@@ -82,7 +80,7 @@ class ProductDeatils extends React.Component {
     }
 
     render () {
-        const { product, stock, clicked, total, alert, redirect, toLogin } = this.state
+        const { product, stock, clicked, total, alert, toCart, toLogin } = this.state
         // console.log(stock)
 
         const settings = {
@@ -104,7 +102,7 @@ class ProductDeatils extends React.Component {
             prevArrow : <PrevArrow/>
         }
 
-        if (redirect) {
+        if (toCart) {
             return <Redirect to='/cart'/>
         } else if (toLogin) {
             return <Redirect to='/login'/>
@@ -158,6 +156,7 @@ class ProductDeatils extends React.Component {
                                 variant="contained" 
                                 style={styles.totalButton} 
                                 onClick={ _ => this.setState({total : total+1})}
+                                disabled={total >= stock ? true : false}
                             >
                                 +
                             </Button>

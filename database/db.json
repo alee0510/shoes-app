@@ -525,38 +525,5 @@
       "cart": []
     }
   ],
-  "transaction_histories": [
-    {
-      "userId": 2,
-      "date": "6/28/2020",
-      "total": 1987300,
-      "transactions": [
-        {
-          "product": "NIKE W AIR MAX 90",
-          "brand": "NIKE",
-          "color": "WHITE/PARTICLE GREY-ROSE-BLACK",
-          "price": 1987300,
-          "size": 39,
-          "qty": 1
-        }
-      ],
-      "id": 1
-    },
-    {
-      "userId": 2,
-      "date": "6/29/2020",
-      "total": 1780000,
-      "transactions": [
-        {
-          "product": "NIKE KYRIE 6",
-          "brand": "NIKE",
-          "color": "WHITE/BLUE FURY-OPTI YELLOW-DIGITAL PINK",
-          "price": 1780000,
-          "size": 38,
-          "qty": 1
-        }
-      ],
-      "id": 2
-    }
-  ]
+  "transaction_histories": []
 }

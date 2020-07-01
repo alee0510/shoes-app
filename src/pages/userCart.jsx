@@ -1,7 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import {
     Table,
     TableHead,
@@ -17,33 +16,20 @@ import CreditCardIcon from '@material-ui/icons/CreditCard'
 
 
 import { URL } from '../actions/helper'
+import { logIn } from '../actions'
 import Alert from '../components/alert'
 
 class UserCart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            cart : [],
             alert : false
         }
     }
 
-    componentDidMount () {
-        this.getData()
-    }
-
-    getData = () => {
-        Axios.get(URL + `/users?id=${localStorage.getItem('id')}`)
-        .then(res => {
-            console.log(res.data)
-            this.setState({ cart : res.data[0].cart, alert : false })
-        })
-        .catch(err => console.log(err))
-    }
-
     handleDelete = (index) => {
         console.log(index)
-        let tempCart = this.state.cart
+        let tempCart = this.props.cart
         tempCart.splice(index, 1)
         
         // update database
@@ -59,8 +45,8 @@ class UserCart extends React.Component {
         let history = {
             userId : this.props.id,
             date : new Date().toLocaleDateString(),
-            total : this.state.cart.map(item => item.qty * item.price).reduce((a, b) => a + b),
-            transactions : this.state.cart
+            total : this.props.cart.map(item => item.total).reduce((a, b) => a + b),
+            transactions : this.props.cart
         }
         console.log(history)
 
@@ -75,7 +61,8 @@ class UserCart extends React.Component {
                 console.log(res.data)
 
                 // update data
-                this.getData()
+                Axios.get(URL + `/users/${this.props.id}`)
+                .then(res => this.logIn(res.data))
             })
         })
         .catch(err => console.log(err))
@@ -98,7 +85,7 @@ class UserCart extends React.Component {
     )
 
     renderTableContents = () => {
-        return this.state.cart.map((item, index) => (
+        return this.props.cart.map((item, index) => (
             <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{item.product}</TableCell>
@@ -123,10 +110,6 @@ class UserCart extends React.Component {
 
     render () {
         const { alert } = this.state
-        
-        if (!this.props.id) {
-            return <Redirect to='/'/>
-        }
 
         return (
             <div style={styles.root}>
@@ -199,8 +182,9 @@ const styles = {
 
 const mapStore = ({user}) => {
     return {
-        id : user.id
+        id : user.id,
+        cart : user.cart
     }
 }
 
-export default connect(mapStore)(UserCart)
+export default connect(mapStore, { logIn })(UserCart)
