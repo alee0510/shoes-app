@@ -5,8 +5,7 @@ import {
     Badge,
     IconButton,
     Menu,
-    MenuItem,
-    Button
+    MenuItem
 } from '@material-ui/core'
 
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
