@@ -153,7 +153,12 @@ class UserCart extends React.Component {
                     }
                 </TableCell>
                 <TableCell>{item.price}</TableCell>
-                <TableCell>{item.price * (qty || item.qty)}</TableCell>
+                <TableCell>
+                    {
+                        selectedIndex === index ?
+                        item.price * qty : item.total
+                    }
+                </TableCell>
                 <TableCell>
                     {
                         selectedIndex === index ?

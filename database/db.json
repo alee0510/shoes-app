@@ -522,7 +522,28 @@
       "password": "user",
       "role": "user",
       "email": "user@gmail.com",
-      "cart": []
+      "cart": [
+        {
+          "product": "NIKE KYRIE 6",
+          "brand": "NIKE",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/nike-KYRIE_6-WHITE_BLUE_FURY_OPTI_YELLOW_DIGITAL_PINK-1.jpg",
+          "color": "WHITE/BLUE FURY-OPTI YELLOW-DIGITAL PINK",
+          "price": 1780000,
+          "size": 38,
+          "total": 1780000,
+          "qty": 1
+        },
+        {
+          "product": "PUMA CLYDE HARDWOOD RETRO",
+          "brand": "PUMA",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/puma-Clyde_Hardwood_Retro-Puma_White_Orange_Pop-1.jpg",
+          "color": "Puma White-Orange Pop",
+          "price": 2314870,
+          "size": 39,
+          "total": 6944610,
+          "qty": 3
+        }
+      ]
     }
   ],
   "transaction_histories": [
@@ -573,6 +594,34 @@
         }
       ],
       "id": 1
+    },
+    {
+      "userId": 2,
+      "date": "7/6/2020, 1:07:26 PM",
+      "total": 5332512,
+      "transactions": [
+        {
+          "product": "NIKE W AIR MAX 90",
+          "brand": "NIKE",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/nike-W_AIR_MAX_90-WHITE_PARTICLE_GREY_ROSE_BLACK-1.jpg",
+          "color": "WHITE/PARTICLE GREY-ROSE-BLACK",
+          "price": 1987300,
+          "size": 38,
+          "total": 3974600,
+          "qty": 2
+        },
+        {
+          "product": "VANS UA ERA (MIX & MATCH)",
+          "brand": "VANS",
+          "image": "https://kickz.akamaized.net/en/media/images/p/1200/vans-UA_Era_Mix__Match-cadmium_yellow_tidepool-1.jpg",
+          "color": "cadmium yellow/tidepool",
+          "price": 678956,
+          "size": 38,
+          "total": 1357912,
+          "qty": 2
+        }
+      ],
+      "id": 2
     }
   ]
 }
