@@ -4,11 +4,14 @@ import { IconButton, Button } from '@material-ui/core'
 import { Link } from "react-scroll"
 import Slider from 'react-slick'
 
+// import icons
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 
+// import styles
 import '../styles/carousel.css'
 
+// import actions
 import { getCarouselData } from '../actions'
 
 class Carousel extends React.Component {
@@ -19,11 +22,11 @@ class Carousel extends React.Component {
     carouselItems = () => {
         return this.props.data.map((item, index) => (
             <div key={index}>
-                <div style={{ backgroundImage : `url(${item.image})`, ...styles.content}}>
-                    <div style={styles.overlay}></div>
-                    <h1 style={styles.titile}>{item.title}</h1>
+                <div style={{ backgroundImage : `url(${item.image})`}} className="content">
+                    <div className="overlay"></div>
+                    <h1 className="title">{item.title}</h1>
                     <Link to="products" smooth={true} duration={1000} spy={true} offset={-50}>
-                        <Button variant="outlined" style={styles.button}>Shop Now</Button>
+                        <Button variant="outlined" id="button">Shop Now</Button>
                     </Link>
                 </div>
             </div>
@@ -32,8 +35,8 @@ class Carousel extends React.Component {
 
     render () {
         return (
-            <div style={styles.root}>
-                <Slider {...settings} style={styles.slider}>
+            <div className="carousel-container">
+                <Slider {...settings} className="slider">
                     {this.carouselItems()}
                 </Slider>
             </div>
@@ -51,7 +54,7 @@ const settings = {
     autoplaySpeed: 4000,
     cssEase: "ease",
     appendDots : dots => (
-        <div style={styles.dots}>
+        <div id="dots">
             <ul>{dots}</ul>
         </div>
     ),
@@ -60,85 +63,10 @@ const settings = {
     dotsClass : "custom_dot"
 }
 
-const styles = {
-    root : {
-        height : '100vh',
-        width : '100%',
-        display : 'flex',
-        justifyContent : 'center',
-        alignItems : 'center'
-    },
-    slider : {
-        height : '100%',
-        width : '100%',
-        posistion : 'relative',
-    },
-    dots : {
-        position : 'absolute',
-        height : 40,
-        bottom : 0,
-        zIndex : 2
-    },
-    next : {
-        position : 'absolute',
-        top : '45%',
-        right : '7%',
-        zIndex : 5,
-        backgroundColor : 'rgba(255, 255, 255, 0.3)',
-        color : 'white'
-    },
-    prev : {
-        position : 'absolute',
-        top : '45%',
-        left : '7%',
-        zIndex : 5,
-        backgroundColor : 'rgba(255, 255, 255, 0.3)',
-        color : 'white'
-    },
-    content : {
-        backgroundRepeat : 'no-repeat',
-        backgroundSize : 'cover',
-        width : '100%',
-        height : '100vh',
-        display : 'flex',
-        flexDirection : 'column',
-        alignItems : 'center',
-        justifyContent : 'flex-end',
-        padding : '5% 0px',
-        position : 'relative'
-    },
-    titile : {
-        color : 'white',
-        fontSize : 64,
-        marginBottom : 30,
-        textTransform : 'capitalize',
-        zIndex : 2
-    },
-    button : {
-        width : 200,
-        height : 50,
-        borderRadius : 0,
-        fontSize : 20,
-        border : '4px solid white',
-        color : 'white',
-        zIndex : 2
-    },
-    overlay : {
-        height : '100%',
-        width : '100%',
-        backgroundColor : 'pink',
-        position : 'absolute',
-        top : 0,
-        left : 0,
-        zIndex : 1,
-        background: 'linear-gradient(0deg, rgba(30,39,46,0.8) 7%, rgba(255,255,255,0) 100%)'
-    }
-}
-
 function NextArrow (props) {
     const { onClick } = props
     return (
-        <IconButton style={styles.next} onClick = {onClick}>
+        <IconButton id="next" onClick = {onClick}>
             <NavigateNextIcon/>
         </IconButton>
     )
@@ -147,7 +75,7 @@ function NextArrow (props) {
 function PrevArrow (props) {
     const { onClick } = props
     return (
-        <IconButton style={styles.prev} onClick = {onClick}>
+        <IconButton id="prev" onClick = {onClick}>
             <NavigateBeforeIcon/>
         </IconButton>
     )
