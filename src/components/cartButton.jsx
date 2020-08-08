@@ -1,14 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-    Badge,
-    IconButton,
-    Menu,
-    MenuItem
-} from '@material-ui/core'
+import { Badge, IconButton, Menu, MenuItem } from '@material-ui/core'
 
+// import icons
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+
+// import styles
+import '../styles/cartButton.css'
 
 class CartButton extends React.Component {
     constructor(props) {
@@ -32,7 +31,7 @@ class CartButton extends React.Component {
         return (
             <div>
                 <IconButton 
-                    style={styles.button} 
+                    id="icon-button"
                     aria-controls="simple-menu" 
                     aria-haspopup="true"
                     onClick={(e) => this.handleClick(e)}
@@ -64,17 +63,17 @@ class CartButton extends React.Component {
                     {
                         this.props.cart.length === 0 ?
                         <div>
-                            <MenuItem style={styles.menuItemInfo}>
-                                <h1 style={styles.menuItemH1}>Cart is empty</h1>
+                            <MenuItem id="menu-item-info">
+                                <h1 id="menu-item-title">Cart is empty</h1>
                             </MenuItem>
                         </div>
                         :
                         <div>
                             {
                                 this.props.cart.map((item, index) => (
-                                    <MenuItem key={index} style={styles.menuItem}>
-                                        <div style={{backgroundImage : `url(${item.image})`, ...styles.contentImage}}></div>
-                                        <div style={styles.infoContainer}>
+                                    <MenuItem key={index} id="menu-item">
+                                        <div style={{backgroundImage : `url(${item.image})`}} className="image-content"></div>
+                                        <div className="info-container">
                                             <h5>{item.product}</h5>
                                             <h5>Rp. {item.price}, 00</h5>
                                             <h5>qty : {item.qty}</h5>
@@ -82,9 +81,9 @@ class CartButton extends React.Component {
                                     </MenuItem>
                                 ))
                             }
-                            <Link to='/cart' style={styles.link} onClick={this.handleClose}>
-                                <MenuItem style={styles.menuItemInfo}>
-                                    <h1 style={styles.menuItemH1}>Go To Cart</h1>
+                            <Link to='/cart' className="link" onClick={this.handleClose}>
+                                <MenuItem id="menu-item-info">
+                                    <h1 id="menu-item-title">Go To Cart</h1>
                                 </MenuItem>
                             </Link>
                         </div>
@@ -93,40 +92,6 @@ class CartButton extends React.Component {
             </div>
         )
     }
-}
-
-const styles = {
-    button : {
-        color : 'white'
-    },
-    menuItem : {
-        display : 'flex',
-        alignItem : 'center'
-    },
-    menuItemInfo : {
-        display : 'flex',
-        alignItem : 'center',
-        justifyContent : 'center'
-    },
-    menuItemH1 : {
-        fontSize : 16,
-        color : '#130f40'
-    },
-    contentImage : {
-        width : '70px',
-        height : '70px',
-        backgroundRepeat : 'no-repeat',
-        backgroundSize : 'cover'
-    },
-    info : {
-        fontSize : 16
-    },
-    infoContainer : {
-        marginLeft : 15
-    },
-    link : {
-        textDecoration : 'none',
-    },
 }
 
 const mapStore = ({user}) => {
