@@ -1,0 +1,12 @@
+#menu-item {
+    width: 200px;
+}
+
+#text {
+    color: black;
+}
+
+.link {
+    text-decoration: none;
+    padding: 0px;
+}

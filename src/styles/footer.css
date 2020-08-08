@@ -1,0 +1,26 @@
+.footer-container {
+    height: 70px;
+    width: 100%;
+    padding: 2% 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #130f40;
+}
+
+.copyright {
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+}
+
+ul {
+    text-decoration: none;
+}
+
+li {
+    display: inline-block;
+    margin-left: 15px;
+    color: white;
+    cursor: pointer;
+}

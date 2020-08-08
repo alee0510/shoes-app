@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { 
     IconButton, 
     Avatar,
@@ -8,16 +9,19 @@ import {
     ListItemIcon,
     ListItemText
 } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 
+// import icons
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
-import FaceIcon from '@material-ui/icons/Face'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 import HistoryIcon from '@material-ui/icons/History'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 
+// import styles & custom component
+import '../styles/profileButton.css'
+
+// import action
 import { logOut } from '../actions'
 
 class ProfileButton extends React.Component {
@@ -30,7 +34,6 @@ class ProfileButton extends React.Component {
     }
 
     handleClick = (event) => {
-        // console.log(event.currentTarget)
         this.setState({anchorEl : event.currentTarget})
     }
 
@@ -45,6 +48,7 @@ class ProfileButton extends React.Component {
     }
 
     render () {
+        const { username, role } = this.props
         return (
             <div>
                 <IconButton 
@@ -53,9 +57,13 @@ class ProfileButton extends React.Component {
                     onClick={(e) => this.handleClick(e)}
                 >
                     {
-                        !this.props.username ? 
+                        !username ? 
                         <Avatar>U</Avatar> :
-                        <Avatar style={{background : '#130f40'}}>{this.props.username.charAt(0).toUpperCase()}</Avatar>
+                        <Avatar 
+                            style={{background : '#130f40'}}
+                        >
+                            {username.charAt(0).toUpperCase()}
+                        </Avatar>
                     }
                 </IconButton>
                 <Menu
@@ -73,76 +81,70 @@ class ProfileButton extends React.Component {
                         vertical: 'top',
                         horizontal: 'right',
                     }}
-                    style={styles.menu}
+                    style={{ top : '0%', left : '3%' }}
                 >
-                {   this.props.username ? this.props.role === 'admin'?
+                {   username ? role === 'admin'?
                     <div>
-                        <Link to='/dashboard' style={styles.link}>
-                            <MenuItem style={styles.menuItem}>
+                        <Link to='/dashboard' className="link">
+                            <MenuItem id="menu-item">
                                 <ListItemIcon>
                                         <DashboardIcon/>
                                     </ListItemIcon>
-                                <ListItemText style={styles.text}>Dashboard</ListItemText>
+                                <ListItemText id="text">Dashboard</ListItemText>
                             </MenuItem>
                         </Link>
-                        <Link to='/' style={styles.link}>
-                            <MenuItem style={styles.menuItem} onClick={this.handleLogOut}>
+                        <Link to='/' className="link">
+                            <MenuItem id="menu-item" onClick={this.handleLogOut}>
                                 <ListItemIcon>
                                         <ExitToAppIcon/>
                                     </ListItemIcon>
-                                <ListItemText style={styles.text}>Logout</ListItemText>
+                                <ListItemText id="text">Logout</ListItemText>
                             </MenuItem>
                         </Link>
                     </div>
                     :
                     <div>
-                    <MenuItem style={styles.menuItem} onClick={this.handleClose}>
-                        <ListItemIcon>
-                                <FaceIcon/>
-                            </ListItemIcon>
-                        <ListItemText style={styles.text}>Profile</ListItemText>
-                    </MenuItem>
-                    <Link to='/cart' style={styles.link}>
-                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
+                    <Link to='/cart' className="link">
+                        <MenuItem id="menu-item" onClick={this.handleClose}>
                             <ListItemIcon>
                                     <ShoppingBasketIcon/>
                                 </ListItemIcon>
-                            <ListItemText style={styles.text}>Cart</ListItemText>
+                            <ListItemText id="text">Cart</ListItemText>
                         </MenuItem>
                     </Link>
-                    <Link to='/history' style={styles.link}>
-                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
+                    <Link to='/history' className="link">
+                        <MenuItem id="menu-item" onClick={this.handleClose}>
                             <ListItemIcon>
                                     <HistoryIcon/>
                                 </ListItemIcon>
-                            <ListItemText style={styles.text}>History</ListItemText>
+                            <ListItemText id="text">History</ListItemText>
                         </MenuItem>
                     </Link>
-                    <Link to='/' style={styles.link}>
-                        <MenuItem style={styles.menuItem} onClick={this.handleLogOut}>
+                    <Link to='/' className="link">
+                        <MenuItem id="menu-item" onClick={this.handleLogOut}>
                             <ListItemIcon>
                                     <ExitToAppIcon/>
                                 </ListItemIcon>
-                            <ListItemText style={styles.text}>Logout</ListItemText>
+                            <ListItemText id="text">Logout</ListItemText>
                         </MenuItem>
                     </Link>
                     </div>
                     :
                     <div>
-                    <Link to='/login' style={styles.link}>
-                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
+                    <Link to='/login' className="link">
+                        <MenuItem id="menu-item" onClick={this.handleClose}>
                             <ListItemIcon>
                                 <MeetingRoomIcon/>
                             </ListItemIcon>
-                            <ListItemText style={styles.text}>Login</ListItemText>
+                            <ListItemText id="text">Login</ListItemText>
                         </MenuItem>
                     </Link>
-                    <Link to='/register' style={styles.link}>
-                        <MenuItem style={styles.menuItem} onClick={this.handleClose}>
+                    <Link to='/register' className="link">
+                        <MenuItem id="menu-item" onClick={this.handleClose}>
                             <ListItemIcon>
                                 <PersonAddIcon/>
                             </ListItemIcon>
-                            <ListItemText style={styles.text}>Register</ListItemText>
+                            <ListItemText id="text">Register</ListItemText>
                         </MenuItem>
                     </Link>
                     </div>
@@ -150,22 +152,6 @@ class ProfileButton extends React.Component {
                 </Menu>
             </div>
         )
-    }
-}
-
-const styles = {
-    menu : {
-        top : '0%',
-        left : '3%'
-    },
-    menuItem : {
-        width : 200
-    },
-    link : {
-        textDecoration : 'none',
-    },
-    text : {
-        color : 'black'
     }
 }
 
