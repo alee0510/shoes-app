@@ -15,7 +15,7 @@ import '../styles/details.css'
 
 import Alert from '../components/alert'
 
-class ProductDeatils extends React.Component {
+class ProductDetails extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
@@ -323,4 +323,4 @@ const mapStore = ({user}) => {
     }
 }
 
-export default connect(mapStore, { keepLogin })(ProductDeatils)
+export default connect(mapStore, { keepLogin })(ProductDetails)
