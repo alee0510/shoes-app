@@ -5,7 +5,7 @@ import { MenuItem, ListItemIcon, ListItemText } from '@material-ui/core'
 // import styles
 import '../styles/menuitem.css'
 
-const MenuItem = (props) => (
+const Item = (props) => (
     <Link to={props.link} className="link">
         <MenuItem id="menu-item" onClick={props.onClose}>
             <ListItemIcon>
@@ -16,4 +16,4 @@ const MenuItem = (props) => (
     </Link>
 )
 
-export default MenuItem
+export default Item

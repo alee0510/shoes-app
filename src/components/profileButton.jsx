@@ -1,14 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { 
-    IconButton, 
-    Avatar,
-    Menu,
-    MenuItem,
-    ListItemIcon,
-    ListItemText
-} from '@material-ui/core'
+import { IconButton, Avatar, Menu } from '@material-ui/core'
 
 // import icons
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
@@ -18,8 +10,8 @@ import HistoryIcon from '@material-ui/icons/History'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 
-// import styles & custom component
-import '../styles/profileButton.css'
+// import custom component
+import Item from '../components/menuitem'
 
 // import action
 import { logOut } from '../actions'
@@ -57,8 +49,7 @@ class ProfileButton extends React.Component {
                     onClick={(e) => this.handleClick(e)}
                 >
                     {
-                        !username ? 
-                        <Avatar>U</Avatar> :
+                        !username ? <Avatar>U</Avatar> :
                         <Avatar 
                             style={{background : '#130f40'}}
                         >
@@ -73,87 +64,56 @@ class ProfileButton extends React.Component {
                     open={Boolean(this.state.anchorEl)}
                     onClose={this.handleClose}
                     getContentAnchorEl={null}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}}
+                    transformOrigin={{ vertical: 'top', horizontal: 'right'}}
                     style={{ top : '0%', left : '3%' }}
                 >
-                {   username ? role === 'admin'?
-                    <div>
-                        <Link to='/dashboard' className="link">
-                            <MenuItem id="menu-item">
-                                <ListItemIcon>
-                                        <DashboardIcon/>
-                                    </ListItemIcon>
-                                <ListItemText id="text">Dashboard</ListItemText>
-                            </MenuItem>
-                        </Link>
-                        <Link to='/' className="link">
-                            <MenuItem id="menu-item" onClick={this.handleLogOut}>
-                                <ListItemIcon>
-                                        <ExitToAppIcon/>
-                                    </ListItemIcon>
-                                <ListItemText id="text">Logout</ListItemText>
-                            </MenuItem>
-                        </Link>
-                    </div>
-                    :
-                    <div>
-                    <Link to='/cart' className="link">
-                        <MenuItem id="menu-item" onClick={this.handleClose}>
-                            <ListItemIcon>
-                                    <ShoppingBasketIcon/>
-                                </ListItemIcon>
-                            <ListItemText id="text">Cart</ListItemText>
-                        </MenuItem>
-                    </Link>
-                    <Link to='/history' className="link">
-                        <MenuItem id="menu-item" onClick={this.handleClose}>
-                            <ListItemIcon>
-                                    <HistoryIcon/>
-                                </ListItemIcon>
-                            <ListItemText id="text">History</ListItemText>
-                        </MenuItem>
-                    </Link>
-                    <Link to='/' className="link">
-                        <MenuItem id="menu-item" onClick={this.handleLogOut}>
-                            <ListItemIcon>
-                                    <ExitToAppIcon/>
-                                </ListItemIcon>
-                            <ListItemText id="text">Logout</ListItemText>
-                        </MenuItem>
-                    </Link>
-                    </div>
-                    :
-                    <div>
-                    <Link to='/login' className="link">
-                        <MenuItem id="menu-item" onClick={this.handleClose}>
-                            <ListItemIcon>
-                                <MeetingRoomIcon/>
-                            </ListItemIcon>
-                            <ListItemText id="text">Login</ListItemText>
-                        </MenuItem>
-                    </Link>
-                    <Link to='/register' className="link">
-                        <MenuItem id="menu-item" onClick={this.handleClose}>
-                            <ListItemIcon>
-                                <PersonAddIcon/>
-                            </ListItemIcon>
-                            <ListItemText id="text">Register</ListItemText>
-                        </MenuItem>
-                    </Link>
-                    </div>
+                {   username ? role === 'admin'
+                    ? <Admin onLogout={this.handleLogOut}/>
+                    : <User onClose={this.handleClose} onLogout={this.handleLogOut}/>
+                    : <NotLogin onClose={this.handleClose}/>
                 }
                 </Menu>
             </div>
         )
     }
 }
+
+const Admin = (props) => (
+    <div>
+        <Item link="/dashboard" text="Dashboard">
+            <DashboardIcon/>
+        </Item>
+        <Item link="/" text="Logout" onClose={props.onLogout}>
+            <ExitToAppIcon/>
+        </Item>
+    </div>
+)
+
+const User = (props) => (
+    <div>
+        <Item link="/cart" text="Cart" onClose={props.onClose}>
+            <ShoppingBasketIcon/>
+        </Item>
+        <Item link="/history" text="History" onClose={props.onClose}>
+            <HistoryIcon/>
+        </Item>
+        <Item link="/" text="Logout" onClose={props.onLogout}>
+            <ExitToAppIcon/>
+        </Item>
+    </div>
+)
+
+const NotLogin = (props) => (
+    <div>
+        <Item link="/login" text="Login" onClose={props.onClose}>
+            <MeetingRoomIcon/>
+        </Item>
+        <Item link="/register" text="Register" onClose={props.onClose}>
+            <PersonAddIcon/>
+        </Item>
+    </div>
+)
 
 const mapStore = ({user}) => {
     return {
