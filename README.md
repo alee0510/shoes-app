@@ -1,9 +1,9 @@
 # Shoes Shop - APP 🛒
 ![Twitter Follow](https://img.shields.io/twitter/follow/a_lee0510?style=social)![GitHub followers](https://img.shields.io/github/followers/alee0510?style=social)
 
-## demo (ongoing . . .)
+## Demo (ongoing . . .)
 
-## development timeline ⏳
+## Development timeline ⏳
 - [x] create app project front-end
 - [x] used redux and redux thunk
 - [x] used real-time database json-server
@@ -12,10 +12,10 @@
 - [ ] build and deploy custom API using firebase function
 - [ ] deployment
 
-## screentshot 🖥
+## Screenshot 🖥
 ![home-page-01](/screenshots/screenshot-home-01.jpg)
 
-## feature ⚖
+## Feature ⚖
 - react-redux & redux-thunx
 - login and register
 - user transaction from add to chart to check out
@@ -25,7 +25,7 @@
 - build custom API usingfirebase function
 - etc.
 
-## images asset references
+## Images asset references
 - https://unsplash.com/
 - https://www.kickz.com/
 
