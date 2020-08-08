@@ -3,7 +3,7 @@
 
 ## demo (ongoing . . .)
 
-## development timeline :
+## development timeline ⏳
 - [x] create app project front-end
 - [x] used redux and redux thunk
 - [x] used real-time database json-server
@@ -12,10 +12,10 @@
 - [ ] build and deploy custom API using firebase function
 - [ ] deployment
 
-## screentshot
+## screentshot 🖥
 ![home-page-01](/screenshots/screenshot-home-01.jpg)
 
-## feature
+## feature ⚖
 - react-redux & redux-thunx
 - login and register
 - user transaction from add to chart to check out
@@ -25,7 +25,7 @@
 - build custom API usingfirebase function
 - etc.
 
-## images asset references :
+## images asset references
 - https://unsplash.com/
 - https://www.kickz.com/
 
