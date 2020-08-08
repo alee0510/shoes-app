@@ -17,7 +17,7 @@ class Navbar extends React.Component {
             <AppBar position="fixed" id="navbar-container" elevation={0}>
                 <Toolbar id="navbar-toolbar">
                     <div className="left-content">
-                        <img src={LOGO} alt='logo' height='100%'/>
+                        <img src={LOGO} alt='logo' id="logo" height='100%'/>
                         <Link to='/' className="link">
                             <h1 id="home">Home</h1>
                         </Link>

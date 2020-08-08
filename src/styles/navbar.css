@@ -32,7 +32,10 @@
 
 .link {
     text-decoration: none;
-    padding-left: 3%;
+}
+
+#logo {
+    margin-right: 3%;
 }
 
 #home {
