@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev" : "concurrently \"npm run start\" \"json-server -p2000 database/db.json\""
   },
   "eslintConfig": {
     "extends": "react-app"
